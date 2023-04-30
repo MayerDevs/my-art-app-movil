@@ -7,7 +7,7 @@
     tools:context=".ProfileActivity">
 
     <ImageView
-        android:id="@+id/id_home3"
+        android:id="@+id/iv_home"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:backgroundTint="#00292929"
@@ -32,7 +32,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/id_music4"
+        android:id="@+id/iv_settings"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"

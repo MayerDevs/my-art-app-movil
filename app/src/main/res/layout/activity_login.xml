@@ -53,7 +53,7 @@
         android:layout_height="50dp"
         android:background="@drawable/rounded_dark"
         android:hint="Correo electrónico"
-        android:paddingLeft="5dp"
+        android:paddingLeft="15dp"
         android:textColor="#394BAF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +84,7 @@
         android:layout_height="50dp"
         android:background="@drawable/rounded_dark"
         android:hint="Contraseña"
-        android:paddingLeft="5dp"
+        android:paddingLeft="15dp"
         android:textColor="#394BAF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,32 +99,34 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
         android:text="¿Aun no tienes cuenta?"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.331"
+        app:layout_constraintHorizontal_bias="0.283"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_iniciar_sesion"
-        app:layout_constraintVertical_bias="0.109" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
+        app:layout_constraintVertical_bias="0.888" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/tv_return_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:text="Registrarse"
         android:textColor="#394BAF"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.745"
+        app:layout_constraintHorizontal_bias="0.781"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_iniciar_sesion"
-        app:layout_constraintVertical_bias="0.109" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/btn_iniciar_sesion"
+        android:id="@+id/btn_login"
         android:layout_width="273dp"
         android:layout_height="66dp"
         android:backgroundTint="#42B92E"
@@ -135,24 +137,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_pass" />
-
-    <Button
-        android:id="@+id/btn_iniciar_sesion5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
-        android:foregroundTint="#CFBABA"
-        android:text="REGISTRARSE"
-        android:textColor="#000000"
-        android:textColorHint="#8BC34A"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.941"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058"
-        app:strokeColor="#000000"
-        app:strokeWidth="1dp" />
 
     <Button
         android:id="@+id/btn_iniciar_sesion3"
