@@ -14,6 +14,18 @@
         android:theme="@style/Theme.MyART"
         tools:targetApi="31">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FollowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FollowersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
