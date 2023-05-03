@@ -2,7 +2,7 @@
         $host = "localhost";
         $dbname = "MyArt";
         $user = "root";
-        $password = "password=";
+        $password = "";
 
         $conexion=new mysqli($host,$user,$password,$dbname);
         if($conexion->connect_errno){
