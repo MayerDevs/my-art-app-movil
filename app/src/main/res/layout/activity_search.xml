@@ -6,4 +6,65 @@
     android:layout_height="match_parent"
     tools:context=".SearchActivity">
 
+    <ImageView
+        android:id="@+id/id_search2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:background="@drawable/rounded_dark"
+        android:backgroundTint="#42B92E"
+        android:layoutDirection="inherit"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.183"
+        app:srcCompat="@drawable/lupa"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MyART"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.082"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.087" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Historial"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_user4"
+        app:layout_constraintVertical_bias="0.086" />
+
+    <EditText
+        android:id="@+id/et_user4"
+        android:layout_width="308dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_dark"
+        android:hint="Buscar"
+        android:paddingLeft="10dp"
+        android:textColor="#394BAF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.183"
+        app:strokeColor="#000000"
+        app:strokeWidth="1dp"></EditText>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
