@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import com.example.myart.clases.Usuario
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -14,6 +15,7 @@ class RegisterActivity : AppCompatActivity() {
     lateinit var btnlogin: Button
     lateinit var tvlogin: TextView
     lateinit var register: Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,13 +34,16 @@ class RegisterActivity : AppCompatActivity() {
             val _user = user_name.text.toString()
             val _email = user_email.text.toString()
             val _pass = user_pass.text.toString()
+            val user= Usuario(_user,"","",_email,"",3,_pass,this,"insert",_user)
 
             if (_user.isEmpty() || _pass.isEmpty() || _pass.isEmpty()){
                 Toast.makeText(this, "Pleace, fill all details.", Toast.LENGTH_SHORT).show()
             }else{
+                user.executeService("http://localhost/MyArt/Usuario.php")
                 Toast.makeText(this, "Register succesfully.", Toast.LENGTH_SHORT).show()
                 val i = Intent(this, MainActivity::class.java)
                 startActivity(i)
+
             }
         }
 
