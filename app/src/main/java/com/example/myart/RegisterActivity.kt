@@ -40,7 +40,7 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Pleace, fill all details.", Toast.LENGTH_SHORT).show()
             }else{
                 user.executeService("http://localhost/MyArt/Usuario.php")
-                Toast.makeText(this, "Register succesfully.", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Register succesfully.", Toast.LENGTH_SHORT).show()
                 val i = Intent(this, MainActivity::class.java)
                 startActivity(i)
 
