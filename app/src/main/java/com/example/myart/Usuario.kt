@@ -6,7 +6,9 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import org.json.JSONObject
 
 open class Usuario {
    // var ide_usu:Int=0
@@ -38,33 +40,51 @@ open class Usuario {
     }
 
     fun executeService(URL: String){
+        val params = HashMap<String, Any>()
+        //params.put("ide_usu", ide_usu.toString())
+        params.put("nom_usu",nom_usu.toString())
+        params.put("ape_usu", ape_usu.toString())
+        params.put("tip_usu",tip_usu.toString())
+        params.put("cor_usu", cor_usu.toString())
+        params.put("eda_usu", eda_usu)
+        params.put("cel_usu",cel_usu)
+        params.put("con_usu",con_usu.toString())
+        params.put("usu_usu",usu_usu)
+        params.put("consulta",consulta)
 
-        val postRequest = object :  StringRequest(Request.Method.POST,URL,
+       // val datos=JSONObject(params)
+
+
+        val postRequest = object:StringRequest(Request.Method.POST,URL,
             Response.Listener<String> { response ->
                 Toast.makeText(context, "succesful conection", Toast.LENGTH_SHORT).show()
             }, Response.ErrorListener {
                 Toast.makeText(context, "Something wrong", Toast.LENGTH_SHORT).show()
-            })
-        {
+            }){
             override fun getParams(): Map<String, String> {
                 val params = HashMap<String, String>()
                 //params.put("ide_usu", ide_usu.toString())
-                params.put("nom_usu", nom_usu)
-                params.put("ape_usu", ape_usu)
-                params.put("tip_usu", tip_usu)
-                params.put("cor_usu", cor_usu)
+                params.put("nom_usu",nom_usu.toString())
+                params.put("ape_usu", ape_usu.toString())
+                params.put("tip_usu",tip_usu.toString())
+                params.put("cor_usu", cor_usu.toString())
                 params.put("eda_usu", eda_usu)
-                params.put("cel_usu", cel_usu.toString())
-                params.put("con_usu", con_usu)
-                params.put("usu_usu", usu_usu)
-                params.put("consulta", consulta)
+                params.put("cel_usu",cel_usu.toString())
+                params.put("con_usu",con_usu.toString())
+                params.put("usu_usu",usu_usu)
+                params.put("consulta",consulta)
+
+                // val datos=JSONObject(params)
                 return params
             }
+            }
+        val queue = Volley.newRequestQueue(context)
+        queue.add(postRequest)
+
 
         }
 
-        val queue = Volley.newRequestQueue(context)
-        queue.add(postRequest)
+
 
 
 
@@ -72,5 +92,3 @@ open class Usuario {
 
 
 
-
-}

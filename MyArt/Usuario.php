@@ -4,15 +4,15 @@ include 'conexion.php';
 $consulta=$_POST['consulta'];
 
 if($consulta=="insert"){
-
-    $ide_usu=$_POST['ide_usu'];
     $nom_usu=$_POST['nom_usu'];
-    $ape_usu=$_POST['nom_usu'];
+    $ape_usu=$_POST['ape_usu'];
     $tip_usu=$_POST['tip_usu'];
     $cor_usu=$_POST['cor_usu'];
     $eda_usu=$_POST['eda_usu'];
     $cel_usu=$_POST['cel_usu'];
-    insertar($nom_usu,$ape_usu,$tip_usu,$cor_usu,$eda_usu,$cel_usu);
+    $con_usu=$_POST['con_usu'];
+    $usu_usu=$_POST['usu_usu'];
+    insertar($nom_usu,$ape_usu,$tip_usu,$cor_usu,$eda_usu,$cel_usu,$con_usu,$usu_usu);
 }
 if($consulta=="delete"){
     $ide_usu=$_POST['ide_usu'];
@@ -28,10 +28,15 @@ if($consulta=="update"){
     $cel_usu=$_POST['cel_usu'];
     actualizar($ide_usu,$nom_usu,$ape_usu,$tip_usu,$cor_usu,$eda_usu,$cel_usu);
 }
+if($consulta=="login"){
+    $cor_usu=$_POST['cor_usu'];
+    $con_usu=$_POST['con_usu'];
+    login($cor_usu,$con_usu);
+}
 
-function insertar($nom_usu,$ape_usu,$tip_usu,$cor_usu,$eda_usu,$cel_usu){
+function insertar($nom_usu,$ape_usu,$tip_usu,$cor_usu,$eda_usu,$cel_usu,$con_usu,$usu_usu){
     include 'conexion.php';
-    $consulta="INSERT into Usuarios values('".$nom_usu."','".$ape_usu."','".$tip_usu."','".$cor_usu."','".$eda_usu."','".$cel_usu."')";
+    $consulta="INSERT into Usuarios(nom_usu,ape_usu,tip_usu,cor_usu,eda_usu,cel_usu,con_usu,usu_usu) values('$nom_usu','$ape_usu','$tip_usu','$cor_usu','$eda_usu',$cel_usu,'$con_usu','$usu_usu')";
     mysqli_query($conexion,$consulta);
     mysqli_close($conexion);
 
@@ -46,6 +51,12 @@ function insertar($nom_usu,$ape_usu,$tip_usu,$cor_usu,$eda_usu,$cel_usu){
  function actualizar($ide_usu,$nom_usu,$ape_usu,$tip_usu,$cor_usu,$eda_usu,$cel_usu){
     include 'conexion.php';
     $consulta="UPDATE Usuarios set nom_usu='$nom_usu',tip_usu='$tip_usu',cor_usu='$cor_usu',eda_usu='$eda_usu',cel_usu='$cel_usu',ape_usu='$ape_usu'  where ide_usu='".$ide_usu."' ";
+    mysqli_query($conexion,$consulta);
+    mysqli_close($conexion);
+ }
+ function login($cor_usu,$con_usu){
+    include 'conexion.php';
+    $consulta="SELECT FROM Usuarios where cor_usu='$cor_usu' and con_usu='$con_usu' ";
     mysqli_query($conexion,$consulta);
     mysqli_close($conexion);
  }
