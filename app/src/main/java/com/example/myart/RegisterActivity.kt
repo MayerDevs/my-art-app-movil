@@ -4,40 +4,43 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 
 class RegisterActivity : AppCompatActivity() {
 
-    lateinit var user_name: EditText
-    lateinit var user_email: EditText
-    lateinit var user_pass: EditText
-    lateinit var privacy_policy: CheckBox
+    lateinit var _nom_usu: EditText
+    lateinit var _ape_usu: EditText
+    lateinit var _tip_usu: EditText
+    lateinit var _tel_usu: EditText
     lateinit var btnlogin: Button
     lateinit var tvlogin: TextView
-    lateinit var register: Button
+
+    lateinit var btn_next_register: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        user_name = findViewById(R.id.et_name)
-        user_email = findViewById(R.id.et_email)
-        user_pass = findViewById(R.id.et_pass)
-        privacy_policy = findViewById(R.id.cb_politcy_privacy)
+        _nom_usu = findViewById(R.id.nom_usu)
+        _ape_usu = findViewById(R.id.ape_usu)
+        _tip_usu = findViewById(R.id.tip_usu)
+        _tel_usu = findViewById(R.id.tel_usu)
         btnlogin = findViewById(R.id.btn_login)
         tvlogin = findViewById(R.id.tv_login)
-        register = findViewById(R.id.btn_register)
+        btn_next_register = findViewById(R.id.btn_next)
 
-        register.setOnClickListener{
+        btn_next_register.setOnClickListener{
             //obtener texto
-            val _user = user_name.text.toString()
-            val _email = user_email.text.toString()
-            val _pass = user_pass.text.toString()
+            val nom_usu = _nom_usu.text.toString()
+            val ape_usu = _ape_usu.text.toString()
+            val tip_usu = _tip_usu.text.toString()
+            val tel_usu = _tel_usu.text.toString()
 
-            if (_user.isEmpty() || _pass.isEmpty() || _pass.isEmpty()){
+            if (nom_usu.isEmpty() || ape_usu.isEmpty() || tip_usu.isEmpty() || tel_usu.isEmpty()){
                 Toast.makeText(this, "Pleace, fill all details.", Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(this, "Register succesfully.", Toast.LENGTH_SHORT).show()
-                val i = Intent(this, MainActivity::class.java)
+                val i = Intent(this, RegisterNextActivity::class.java)
                 startActivity(i)
             }
         }

@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="REGISTRO"
-        android:textColor="#080E49"
+        android:textColor="#000000"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,133 +33,61 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.071" />
 
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre de usuario"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.145"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.282" />
-
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="328dp"
-        android:text="Correo electrónico"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.734" />
-
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="120dp"
-        android:layout_height="19dp"
-        android:text="términos de uso y"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.79"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65" />
-
-    <CheckBox
-        android:id="@+id/cb_politcy_privacy"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.671" />
-
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="135dp"
-        android:layout_height="19dp"
-        android:text="política de privacidad "
-        android:textSize="14sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.322"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.679" />
-
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="He leído y acepto los "
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.346"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65" />
-
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="de MyART"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.662"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.679" />
-
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contraseña"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.116"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.535" />
-
     <EditText
-        android:id="@+id/et_pass"
+        android:id="@+id/tip_usu"
         android:layout_width="340dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_dark"
+        android:hint="Tipo de usuario"
+        android:paddingLeft="15dp"
+        android:textColor="#394BAF"
+        android:nextFocusDown="@id/ape_usu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.552"
+        app:strokeColor="#000000"
+        app:strokeWidth="3dp"></EditText>
+
+    <EditText
+        android:id="@+id/tel_usu"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_dark"
+        android:drawableLeft="@android:drawable/ic_menu_call"
+        android:drawablePadding="10dp"
+        android:drawableTint="#292929"
+        android:inputType="number"
+        android:nextFocusDown="@id/tip_usu"
+        android:digits="0123456789"
+        android:maxLength="10"
+        android:hint="Telefono"
+        android:paddingLeft="15dp"
         android:textColor="#394BAF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.588"
+        app:layout_constraintVertical_bias="0.67"
         app:strokeColor="#000000"
-        app:strokeWidth="3dp"
-        android:paddingLeft="15dp"></EditText>
+        app:strokeWidth="3dp"></EditText>
 
     <EditText
-        android:id="@+id/et_name"
+        android:id="@+id/nom_usu"
         android:layout_width="340dp"
         android:layout_height="50dp"
         android:background="@drawable/rounded_dark"
+        android:drawableLeft="@drawable/user"
+        android:drawablePadding="10dp"
+        android:drawableTint="#99292929"
+        android:inputType="textPersonName"
+        android:hint="Nombre"
+        android:paddingLeft="15dp"
         android:textColor="#394BAF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -168,39 +96,46 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.331"
         app:strokeColor="#000000"
-        app:strokeWidth="1dp"
-        android:paddingLeft="15dp"></EditText>
+        app:strokeWidth="1dp"></EditText>
 
     <EditText
-        android:id="@+id/et_email"
+        android:id="@+id/ape_usu"
         android:layout_width="340dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_dark"
+        android:drawableLeft="@drawable/user"
+        android:drawablePadding="10dp"
+        android:drawableTint="#99292929"
+        android:inputType="textPersonName"
+        android:nextFocusDown="@id/nom_usu"
+        android:hint="Apellido"
+        android:paddingLeft="15dp"
         android:textColor="#394BAF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.444"
+        app:layout_constraintVertical_bias="0.428"
         app:strokeColor="#000000"
-        app:strokeWidth="1dp"
-        android:paddingLeft="15dp"></EditText>
+        app:strokeWidth="1dp"></EditText>
 
     <Button
-        android:id="@+id/btn_register"
-        android:layout_width="273dp"
-        android:layout_height="66dp"
+        android:id="@+id/btn_next"
+        android:layout_width="140dp"
+        android:layout_height="55dp"
+        android:background="@drawable/rounded_light"
         android:backgroundTint="#42B92E"
-        android:text="REGÍSTRATE"
+        android:text="Siguiente"
         android:textColor="#FBFBFF"
-        android:textSize="24sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.87"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.837" />
+        app:layout_constraintVertical_bias="0.847" />
 
     <TextView
         android:id="@+id/tv_login"
@@ -213,14 +148,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.725"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_register"
-        app:layout_constraintVertical_bias="0.581" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.96" />
 
     <TextView
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
         android:text="¿Ya tienes cuenta?"
         android:textColor="#000000"
         android:textSize="16sp"
@@ -228,8 +162,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.318"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_register"
-        app:layout_constraintVertical_bias="0.914" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.96" />
 
     <Button
         android:id="@+id/btn_login"
