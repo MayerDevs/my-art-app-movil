@@ -31,19 +31,25 @@ class RegisterNextActivity : AppCompatActivity() {
 
         btn_register.setOnClickListener {
             //obtener texto
+            val bl= intent.extras
             val cor_usu = _cor_usu.text.toString()
             val eda_usu = _eda_usu.text.toString()
             val con_usu = _con_usu.text.toString()
-            val con_usu_verified = _con_usu_verified.text.toString()
-            val user= Usuario("","","",cor_usu,eda_usu,3,con_usu,this,"insert","")
+            var nom_usu = bl.getString("nom_usu")
+            var ape_usu = bl.getString("ape_usu")
+            var tip_usu = bl.getString("tip_usu")
+            var tel_usu = bl.getString("tel_usu")
+            //val con_usu_verified = _con_usu_verified.text.toString()
+            val user=Usuario(nom_usu,"","","",
+            "",7,"",this,"insert","")
 
             if (cor_usu.isEmpty() || eda_usu.isEmpty() || con_usu.isEmpty() || con_usu.isEmpty() || policy_privacy.isSelected) {
                 Toast.makeText(this, "Pleace, fill all details.", Toast.LENGTH_SHORT).show()
             } else {
                 user.executeService("http://192.168.80.18/MyArt/Usuario.php")
               //  Toast.makeText(this, "Register succesfully.", Toast.LENGTH_SHORT).show()
-                val i = Intent(this, MainActivity::class.java)
-                startActivity(i)
+               // val i = Intent(this, MainActivity::class.java)
+                //startActivity(i)
             }
         }
     }
