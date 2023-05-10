@@ -56,10 +56,17 @@ function insertar($nom_usu,$ape_usu,$tip_usu,$cor_usu,$eda_usu,$cel_usu,$con_usu
  }
  function login($cor_usu,$con_usu){
     include 'conexion.php';
-    $consulta="SELECT FROM Usuarios where cor_usu='$cor_usu' and con_usu='$con_usu' ";
-    mysqli_query($conexion,$consulta);
-    mysqli_close($conexion);
- }
 
+    $consulta=$conexion->prepare("SELECT FROM Usuarios where cor_usu=? and con_usu=? ");
+    $consulta->bind_param('ss',$cor_usu,$con_usu);
+    $consulta->execute();
+    $resultado=$consulta->get_result();
+    if($fila=$resultado->fetch_assoc()){
+        echo "Sesion iniciada";
+
+    }
+    $consulta->close();
+    $conexion->close();
+ }
 
 ?>
