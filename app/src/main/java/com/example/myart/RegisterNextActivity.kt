@@ -46,7 +46,7 @@ class RegisterNextActivity : AppCompatActivity() {
             if (cor_usu.isEmpty() || eda_usu.isEmpty() || con_usu.isEmpty() || con_usu.isEmpty() || policy_privacy.isSelected) {
                 Toast.makeText(this, "Pleace, fill all details.", Toast.LENGTH_SHORT).show()
             } else {
-                user.executeService("http://192.168.80.18/MyArt/Usuario.php")
+                user.Register("http://192.168.80.18/MyArt/Usuario.php")
               //  Toast.makeText(this, "Register succesfully.", Toast.LENGTH_SHORT).show()
                // val i = Intent(this, MainActivity::class.java)
                 //startActivity(i)

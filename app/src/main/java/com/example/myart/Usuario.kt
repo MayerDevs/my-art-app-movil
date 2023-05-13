@@ -2,6 +2,7 @@ package com.example.myart.clases
 
 import android.content.Context
 import android.widget.Toast
+import com.android.volley.AuthFailureError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -21,6 +22,8 @@ open class Usuario {
     var con_usu:String=""
     var usu_usu:String=""
     var consulta:String=""
+    var log=false
+
     lateinit var context:Context
 
     constructor(nom_usu:String,ape_usu:String,tip_usu:String,cor_usu:String,eda_usu:String,cel_usu:Int,con_usu:String,context:Context,consulta:String,usu_usu:String){
@@ -37,9 +40,10 @@ open class Usuario {
         this.consulta=consulta
         this.usu_usu=usu_usu
 
+
     }
 
-    fun executeService(URL: String){
+    fun Register(URL: String){
         val params = HashMap<String, Any>()
         //params.put("ide_usu", ide_usu.toString())
         params.put("nom_usu",nom_usu.toString())
@@ -84,9 +88,37 @@ open class Usuario {
 
         }
 
-
-
-
+    fun Login (URL: String){
+        val stringRequest: StringRequest = object : StringRequest(
+            Method.POST,
+            URL,
+            Response.Listener { response ->
+                if(!response.isEmpty()){
+                    log=true
+                    Toast.makeText(context, "Succesfully session.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "User or password wrong.", Toast.LENGTH_SHORT).show()
+                }
+            },
+            Response.ErrorListener { error ->
+                Toast.makeText(
+                    context,
+                    error.toString(),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+                val params = HashMap<String, String>()
+                params.put("cor_usu",cor_usu)
+                params.put("con_usu",con_usu)
+                params.put("consulta", consulta)
+                return params
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(stringRequest)
+    }
 
     }
 

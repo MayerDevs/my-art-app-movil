@@ -40,10 +40,10 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Pleace, fill all details.", Toast.LENGTH_SHORT).show()
             }else{
                 val i = Intent(this@RegisterActivity, RegisterNextActivity::class.java)
-                intent.putExtra("nom_usu",nom_usu)
-                intent.putExtra("ape_usu",ape_usu)
-                intent.putExtra("tip_usu",tip_usu)
-                intent.putExtra("tel_usu",tel_usu)
+                i.putExtra("nom_usu",nom_usu)
+                i.putExtra("ape_usu",ape_usu)
+                i.putExtra("tip_usu",tip_usu)
+                i.putExtra("tel_usu",tel_usu)
                 startActivity(i)
                 finish()
                 /*  EXTRAER VARIABLES PARA HACER LA INSERCIÓN

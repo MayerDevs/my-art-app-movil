@@ -35,10 +35,14 @@ class LoginActivity : AppCompatActivity() {
             if (cor_usu.isEmpty() || con_usu.isEmpty()){
                 Toast.makeText(this@LoginActivity, "Pleace, fill all details.", Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(this@LoginActivity, "Login succesfully.", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(this@LoginActivity, "Login succesfully.", Toast.LENGTH_SHORT).show()
                 val user= Usuario("","","",cor_usu,"",0,con_usu,this,"login","")
-                
+                user.Login("http://192.168.80.18/MyArt/Usuario.php")
+                val i = Intent(this, MainActivity::class.java)
+                startActivity(i)
+
             }
+
         }
 
         register.setOnClickListener {
