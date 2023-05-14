@@ -1,6 +1,7 @@
 <?php
 
 include 'conexion.php';
+
 $consulta=$_POST['consulta'];
 
 if($consulta=="insert"){
@@ -56,17 +57,16 @@ function insertar($nom_usu,$ape_usu,$tip_usu,$cor_usu,$eda_usu,$cel_usu,$con_usu
  }
  function login($cor_usu,$con_usu){
     include 'conexion.php';
-
-    $consulta=$conexion->prepare("SELECT FROM Usuarios where cor_usu=? and con_usu=? ");
+    $consulta=$conexion->prepare("SELECT * FROM Usuarios where cor_usu=? and con_usu=? ");
     $consulta->bind_param('ss',$cor_usu,$con_usu);
     $consulta->execute();
     $resultado=$consulta->get_result();
-    if($fila=$resultado->fetch_assoc()){
-        echo "Sesion iniciada";
-
+    if($fila = $resultado->fetch_assoc()){
+        echo json_encode($fila,JSON_UNESCAPED_UNICODE);
     }
     $consulta->close();
     $conexion->close();
  }
+
 
 ?>
