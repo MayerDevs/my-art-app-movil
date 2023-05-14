@@ -17,6 +17,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var login: Button
     lateinit var cor_usu: EditText
     lateinit var con_usu: EditText
+    lateinit var DbHelper:DbHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

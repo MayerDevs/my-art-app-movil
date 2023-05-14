@@ -9,6 +9,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.myart.DbHelper
 import org.json.JSONObject
 
 open class Usuario {
@@ -94,8 +95,12 @@ open class Usuario {
             URL,
             Response.Listener { response ->
                 if(!response.isEmpty()){
+                    var DbHelper:DbHelper
                     log=true
+                    DbHelper= DbHelper(context)
+                    DbHelper.add(cor_usu,con_usu)
                     Toast.makeText(context, "Succesfully session.", Toast.LENGTH_SHORT).show()
+
                 } else {
                     Toast.makeText(context, "User or password wrong.", Toast.LENGTH_SHORT).show()
                 }
