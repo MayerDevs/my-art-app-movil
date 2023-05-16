@@ -15,10 +15,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var music: ImageView
     lateinit var user: ImageView
     lateinit var upload_resource: ImageView
+
+    /* VARIABLES BLOQUEADAS PORQUE SE ENCUENTRAN EN EL CARD_VIDEO
+
     lateinit var image_user_resource: ImageView
     lateinit var like: ImageView
     lateinit var comment: ImageView
     lateinit var share: ImageView
+     */
+
     lateinit var search: ImageView
     var log=false
     var DbHelper=DbHelper(this)
@@ -35,10 +40,15 @@ class MainActivity : AppCompatActivity() {
         music = findViewById(R.id.iv_music)
         user = findViewById(R.id.iv_user)
         upload_resource = findViewById(R.id.iv_upload_resource)
+
+        /* VARIABLES BLOQUEADAS PORQUE SE ENCUENTRAN EN EL CARD_VIDEO
+
         image_user_resource = findViewById(R.id.iv_user_resource)
         like = findViewById(R.id.iv_like)
         comment = findViewById(R.id.iv_comment)
         share = findViewById(R.id.iv_share)
+        */
+
         search = findViewById(R.id.iv_search)
         home.setOnClickListener{
             Toast.makeText(this, "Home.", Toast.LENGTH_SHORT).show()
@@ -67,11 +77,15 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
         upload_resource.setOnClickListener{
-            Toast.makeText(this, "upload resource.", Toast.LENGTH_SHORT).show()
-            val i = Intent(this, LoginActivity::class.java)
+            Toast.makeText(this, "camera.", Toast.LENGTH_SHORT).show()
+            val i = Intent(this, CameraActivity::class.java)
             startActivity(i)
         }
+
+        /* VARIABLES BLOQUEADAS PORQUE SE ENCUENTRAN EN EL CARD_VIDEO
+
         image_user_resource.setOnClickListener{
             Toast.makeText(this, "profile user resource.", Toast.LENGTH_SHORT).show()
             val i = Intent(this, ProfileActivity::class.java)
@@ -91,7 +105,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "share share.", Toast.LENGTH_SHORT).show()
             val i = Intent(this, LoginActivity::class.java)
             startActivity(i)
-        }
+        }*/
         search.setOnClickListener{
             Toast.makeText(this, "search.", Toast.LENGTH_SHORT).show()
             val i = Intent(this, SearchActivity::class.java)
