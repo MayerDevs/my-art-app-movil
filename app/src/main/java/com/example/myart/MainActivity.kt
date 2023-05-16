@@ -1,6 +1,7 @@
 package com.example.myart
 
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -19,6 +20,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var comment: ImageView
     lateinit var share: ImageView
     lateinit var search: ImageView
+    var log=false
+    var DbHelper=DbHelper(this)
     //lateinit var comment_resource: ImageView
     //lateinit var name_user_resource: ImageView
 
@@ -37,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         comment = findViewById(R.id.iv_comment)
         share = findViewById(R.id.iv_share)
         search = findViewById(R.id.iv_search)
-
         home.setOnClickListener{
             Toast.makeText(this, "Home.", Toast.LENGTH_SHORT).show()
         }
@@ -51,9 +53,19 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "music.", Toast.LENGTH_SHORT).show()
         }
         user.setOnClickListener{
-            Toast.makeText(this, "user.", Toast.LENGTH_SHORT).show()
-            val i = Intent(this, LoginActivity::class.java)
-            startActivity(i)
+            val db:SQLiteDatabase=DbHelper.readableDatabase
+            val cursor=db.rawQuery("SELECT * FROM Usuarios",null)
+            if(cursor.moveToFirst()){
+                Toast.makeText(this, "Start session", Toast.LENGTH_SHORT).show()
+                val i = Intent(this, ProfileActivity::class.java)
+                startActivity(i)
+            }
+            else{
+                Toast.makeText(this, "user.", Toast.LENGTH_SHORT).show()
+                val i = Intent(this, LoginActivity::class.java)
+                startActivity(i)
+            }
+
         }
         upload_resource.setOnClickListener{
             Toast.makeText(this, "upload resource.", Toast.LENGTH_SHORT).show()
