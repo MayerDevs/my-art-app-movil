@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
             }else{
                // Toast.makeText(this@LoginActivity, "Login succesfully.", Toast.LENGTH_SHORT).show()
                 val user= Usuario("","","",cor_usu,"",0,con_usu,this,"login","")
-                user.Login("http://192.168.80.18/MyArt/Usuario.php")
+                user.Login("http://192.168.80.18/MyArt/Usuario.php?cor_usu=$cor_usu&con_usu=$con_usu&consulta=login")
                 val i = Intent(this, MainActivity::class.java)
                 startActivity(i)
 

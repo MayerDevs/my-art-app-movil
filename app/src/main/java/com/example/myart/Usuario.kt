@@ -90,39 +90,32 @@ open class Usuario {
         }
 
     fun Login (URL: String){
-        val stringRequest: StringRequest = object : StringRequest(
-            Method.POST,
-            URL,
-            Response.Listener { response ->
-                if(!response.isEmpty()){
-                    var DbHelper:DbHelper
-                    log=true
-                    DbHelper= DbHelper(context)
-                    DbHelper.add(cor_usu,con_usu)
-                    Toast.makeText(context, "Succesfully session.", Toast.LENGTH_SHORT).show()
+        val jsonRequest= JsonObjectRequest(Request.Method.GET,URL,null, { response ->
+            var DbHelper:DbHelper
+            log=true
+            DbHelper= DbHelper(context)
+            DbHelper.add(cor_usu,con_usu)
+            Toast.makeText(context, "Succesfully session.", Toast.LENGTH_SHORT).show()
+        }, {
+            Toast.makeText(context, "User or password wrong.", Toast.LENGTH_SHORT).show()
 
-                } else {
-                    Toast.makeText(context, "User or password wrong.", Toast.LENGTH_SHORT).show()
-                }
-            },
-            Response.ErrorListener { error ->
-                Toast.makeText(
-                    context,
-                    error.toString(),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }) {
-            @Throws(AuthFailureError::class)
-            override fun getParams(): Map<String, String> {
-                val params = HashMap<String, String>()
-                params.put("cor_usu",cor_usu)
-                params.put("con_usu",con_usu)
-                params.put("consulta", consulta)
-                return params
-            }
-        }
+        })
+
         val requestQueue = Volley.newRequestQueue(context)
-        requestQueue.add(stringRequest)
+        requestQueue.add(jsonRequest)
+
+    }
+    fun delete (URL: String){
+        val jsonRequest= JsonObjectRequest(Request.Method.GET,URL,null, { response ->
+            Toast.makeText(context, "account delete succesfully", Toast.LENGTH_SHORT).show()
+        }, {
+            Toast.makeText(context, "User or password wrong.", Toast.LENGTH_SHORT).show()
+
+        })
+
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(jsonRequest)
+
     }
 
     }

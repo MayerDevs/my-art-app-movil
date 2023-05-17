@@ -48,8 +48,8 @@ class RegisterNextActivity : AppCompatActivity() {
             } else {
                 user.Register("http://192.168.80.18/MyArt/Usuario.php")
               //  Toast.makeText(this, "Register succesfully.", Toast.LENGTH_SHORT).show()
-               // val i = Intent(this, MainActivity::class.java)
-                //startActivity(i)
+               val i = Intent(this, MainActivity::class.java)
+                startActivity(i)
             }
         }
     }

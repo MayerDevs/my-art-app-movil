@@ -1,8 +1,10 @@
 <?php
 
 include 'conexion.php';
-
-$consulta=$_POST['consulta'];
+$consulta=$_GET['consulta'];
+if($consulta==null){
+    $consulta=$_POST['consulta'];
+}
 
 if($consulta=="insert"){
     $nom_usu=$_POST['nom_usu'];
@@ -30,10 +32,31 @@ if($consulta=="update"){
     actualizar($ide_usu,$nom_usu,$ape_usu,$tip_usu,$cor_usu,$eda_usu,$cel_usu);
 }
 if($consulta=="login"){
-    $cor_usu=$_POST['cor_usu'];
-    $con_usu=$_POST['con_usu'];
+    $cor_usu=$_GET['cor_usu'];
+    $con_usu=$_GET['con_usu'];
     login($cor_usu,$con_usu);
 }
+if($consulta=="consult"){
+    $cor_usu=$_GET['cor_usu'];
+    consult($cor_usu);
+}
+function consult($cor_usu){
+    include 'conexion.php';
+    $consulta=$conexion->prepare("SELECT * FROM Usuarios where cor_usu=? ");
+    $consulta->bind_param('s',$cor_usu);
+    $consulta->execute();
+    $resultado=$consulta->get_result();
+    if($fila = $resultado->fetch_assoc()){
+        echo json_encode($fila);
+    }
+    else{
+        echo"Something went wrong";
+    }
+    $consulta->close();
+    $conexion->close();
+   
+
+ }
 
 function insertar($nom_usu,$ape_usu,$tip_usu,$cor_usu,$eda_usu,$cel_usu,$con_usu,$usu_usu){
     include 'conexion.php';
@@ -62,7 +85,7 @@ function insertar($nom_usu,$ape_usu,$tip_usu,$cor_usu,$eda_usu,$cel_usu,$con_usu
     $consulta->execute();
     $resultado=$consulta->get_result();
     if($fila = $resultado->fetch_assoc()){
-        echo json_encode($fila,JSON_UNESCAPED_UNICODE);
+            echo json_encode($fila);
     }
     $consulta->close();
     $conexion->close();
