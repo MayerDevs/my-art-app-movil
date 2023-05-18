@@ -41,7 +41,7 @@ class RegisterNextActivity : AppCompatActivity() {
             val con_usu = _con_usu.text.toString()
 
             //val con_usu_verified = _con_usu_verified.text.toString()
-            val user=Usuario(nom_usu.toString(),ape_usu.toString(),tip_usu.toString(),cor_usu,eda_usu,2,con_usu,this,"insert",nom_usu.toString())
+            val user=Usuario(nom_usu.toString(),ape_usu.toString(),tip_usu.toString(),cor_usu,eda_usu,cel_usu.toInt(),con_usu,this,"insert",nom_usu.toString())
 
             if (cor_usu.isEmpty() || eda_usu.isEmpty() || con_usu.isEmpty() || con_usu.isEmpty() || policy_privacy.isSelected) {
                 Toast.makeText(this, "Pleace, fill all details.", Toast.LENGTH_SHORT).show()

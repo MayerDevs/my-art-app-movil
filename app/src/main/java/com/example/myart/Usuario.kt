@@ -92,13 +92,17 @@ open class Usuario {
     fun Login (URL: String){
         val jsonRequest= JsonObjectRequest(Request.Method.GET,URL,null, { response ->
             var DbHelper:DbHelper
-            log=true
             DbHelper= DbHelper(context)
-            DbHelper.add(cor_usu,con_usu)
-            Toast.makeText(context, "Succesfully session.", Toast.LENGTH_SHORT).show()
+            if(log==true){
+                delete("http://192.168.80.18/MyArt/Usuario.php?cor_usu=$cor_usu&con_usu=$con_usu&consulta=delete")
+                DbHelper.delete(1)
+            }
+            else{
+                DbHelper.add(cor_usu,con_usu)
+                Toast.makeText(context, "Succesfully session.", Toast.LENGTH_SHORT).show()
+            }
         }, {
             Toast.makeText(context, "User or password wrong.", Toast.LENGTH_SHORT).show()
-
         })
 
         val requestQueue = Volley.newRequestQueue(context)
@@ -109,8 +113,18 @@ open class Usuario {
         val jsonRequest= JsonObjectRequest(Request.Method.GET,URL,null, { response ->
             Toast.makeText(context, "account delete succesfully", Toast.LENGTH_SHORT).show()
         }, {
-            Toast.makeText(context, "User or password wrong.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "account delete succesfully", Toast.LENGTH_SHORT).show()
+        })
 
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(jsonRequest)
+
+    }
+    fun update (URL: String){
+        val jsonRequest= JsonObjectRequest(Request.Method.GET,URL,null, { response ->
+            Toast.makeText(context, "account delete succesfully", Toast.LENGTH_SHORT).show()
+        }, {
+            Toast.makeText(context, "account delete succesfully", Toast.LENGTH_SHORT).show()
         })
 
         val requestQueue = Volley.newRequestQueue(context)

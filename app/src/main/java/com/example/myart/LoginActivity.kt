@@ -37,7 +37,13 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, "Pleace, fill all details.", Toast.LENGTH_SHORT).show()
             }else{
                // Toast.makeText(this@LoginActivity, "Login succesfully.", Toast.LENGTH_SHORT).show()
+                val bl = getIntent().getExtras();
+                var log = bl?.getBoolean("log")
                 val user= Usuario("","","",cor_usu,"",0,con_usu,this,"login","")
+                if(log!=null){
+                    user.log=log
+                }
+                //Toast.makeText(this@LoginActivity, ""+log, Toast.LENGTH_SHORT).show()
                 user.Login("http://192.168.80.18/MyArt/Usuario.php?cor_usu=$cor_usu&con_usu=$con_usu&consulta=login")
                 val i = Intent(this, MainActivity::class.java)
                 startActivity(i)

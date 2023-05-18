@@ -14,11 +14,13 @@ class SettingsActivity : AppCompatActivity() {
     lateinit var policy_privacy: Button
     lateinit var follow: Button
     lateinit var close: Button
+    lateinit var delete: Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-
+        delete = findViewById(R.id.btn_delete_account)
         previous = findViewById(R.id.iv_previous)
         notification = findViewById(R.id.btn_notification)
         policy_privacy = findViewById(R.id.btn_policy_privacy)
@@ -50,6 +52,13 @@ class SettingsActivity : AppCompatActivity() {
         }
         policy_privacy.setOnClickListener{
             Toast.makeText(this, "policy and privacy.", Toast.LENGTH_SHORT).show()
+        }
+
+        delete.setOnClickListener{
+            val i = Intent(this, LoginActivity::class.java)
+            i.putExtra("log",true)
+            startActivity(i)
+
         }
         follow.setOnClickListener{
             Toast.makeText(this, "follows.", Toast.LENGTH_SHORT).show()
