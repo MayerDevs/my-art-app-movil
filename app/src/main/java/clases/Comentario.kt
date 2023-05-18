@@ -1,0 +1,4 @@
+package clases
+
+class Comentario {
+}

@@ -1,16 +1,12 @@
-package com.example.myart.clases
+package clases
 
 import android.content.Context
 import android.widget.Toast
-import com.android.volley.AuthFailureError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.Request
-import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.myart.DbHelper
-import org.json.JSONObject
 
 open class Usuario {
    // var ide_usu:Int=0
@@ -91,10 +87,11 @@ open class Usuario {
 
     fun Login (URL: String){
         val jsonRequest= JsonObjectRequest(Request.Method.GET,URL,null, { response ->
-            var DbHelper:DbHelper
+            var DbHelper: DbHelper
             DbHelper= DbHelper(context)
             if(log==true){
                 delete("http://192.168.80.18/MyArt/Usuario.php?cor_usu=$cor_usu&con_usu=$con_usu&consulta=delete")
+
                 DbHelper.delete(1)
             }
             else{
@@ -110,14 +107,15 @@ open class Usuario {
 
     }
     fun delete (URL: String){
-        val jsonRequest= JsonObjectRequest(Request.Method.GET,URL,null, { response ->
-            Toast.makeText(context, "account delete succesfully", Toast.LENGTH_SHORT).show()
-        }, {
-            Toast.makeText(context, "account delete succesfully", Toast.LENGTH_SHORT).show()
-        })
+        val Delete = StringRequest(Request.Method.GET,URL,
+            { response ->
+                Toast.makeText(context, "Account deleted", Toast.LENGTH_SHORT).show()
+            }, {
+                Toast.makeText(context, "Something wrong", Toast.LENGTH_SHORT).show()
+            })
 
         val requestQueue = Volley.newRequestQueue(context)
-        requestQueue.add(jsonRequest)
+        requestQueue.add(Delete)
 
     }
     fun update (URL: String){
@@ -131,6 +129,7 @@ open class Usuario {
         requestQueue.add(jsonRequest)
 
     }
+
 
     }
 

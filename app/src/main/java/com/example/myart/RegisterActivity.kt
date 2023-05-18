@@ -28,6 +28,26 @@ class RegisterActivity : AppCompatActivity() {
         btnlogin = findViewById(R.id.btn_login)
         tvlogin = findViewById(R.id.tv_login)
         btn_next_register = findViewById(R.id.btn_next)
+        val i = Intent(this@RegisterActivity, RegisterNextActivity::class.java)
+        val bl = getIntent().getExtras();
+        var nom_usuU = bl?.getString("nom_usu")
+        var ape_usuU = bl?.getString("ape_usu")
+        var tip_usuU = bl?.getString("tip_usu")
+        var cel_usuU = bl?.getString("cel_usu")
+        var cor_usuU = bl?.getString("cor_usu")
+        var eda_usuU = bl?.getString("eda_usu")
+        var con_usuU = bl?.getString("tip_usu")
+        var Update = bl?.getBoolean("Update")
+        if(nom_usuU!=null){
+            _nom_usu.setText(nom_usuU)
+            _ape_usu.setText(ape_usuU)
+            _tel_usu.setText(cel_usuU.toString())
+            _tip_usu.setText(tip_usuU)
+            i.putExtra("cor_usuU",cor_usuU)
+            i.putExtra("eda_usuU",eda_usuU)
+            i.putExtra("con_usuU",con_usuU)
+            i.putExtra("update",Update)
+        }
 
         btn_next_register.setOnClickListener{
             //obtener texto
@@ -35,15 +55,13 @@ class RegisterActivity : AppCompatActivity() {
             val ape_usu = _ape_usu.text.toString()
             val tip_usu = _tip_usu.text.toString()
             val tel_usu = _tel_usu.text.toString()
-
             if (nom_usu.isEmpty() || ape_usu.isEmpty() || tip_usu.isEmpty() || tel_usu.isEmpty()){
                 Toast.makeText(this, "Pleace, fill all details.", Toast.LENGTH_SHORT).show()
             }else{
-                val i = Intent(this@RegisterActivity, RegisterNextActivity::class.java)
                 i.putExtra("nom_usu",nom_usu)
                 i.putExtra("ape_usu",ape_usu)
                 i.putExtra("tip_usu",tip_usu)
-                i.putExtra("tel_usu",tel_usu)
+                i.putExtra("tel_usu",tel_usu.toInt())
                 startActivity(i)
                 finish()
                 /*  EXTRAER VARIABLES PARA HACER LA INSERCIÓN

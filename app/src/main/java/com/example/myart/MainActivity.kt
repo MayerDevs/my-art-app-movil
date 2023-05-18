@@ -6,11 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
+import clases.DbHelper
 import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.myart.clases.Usuario
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var search: ImageView
     var log=false
-    var DbHelper=DbHelper(this)
+    var DbHelper= DbHelper(this)
     //lateinit var comment_resource: ImageView
     //lateinit var name_user_resource: ImageView
 
