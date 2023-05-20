@@ -118,17 +118,6 @@ open class Usuario {
         requestQueue.add(Delete)
 
     }
-    fun update (URL: String){
-        val jsonRequest= JsonObjectRequest(Request.Method.GET,URL,null, { response ->
-            Toast.makeText(context, "account delete succesfully", Toast.LENGTH_SHORT).show()
-        }, {
-            Toast.makeText(context, "account delete succesfully", Toast.LENGTH_SHORT).show()
-        })
-
-        val requestQueue = Volley.newRequestQueue(context)
-        requestQueue.add(jsonRequest)
-
-    }
 
 
     }
