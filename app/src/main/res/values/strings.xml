@@ -2,4 +2,14 @@
     <string name="app_name">MyART</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="options_content">Opciones de contenido</string>
+    <string-array name="type_content">
+        <item>Tipo de contenido</item>
+        <item>Imagen</item>
+        <item>Video</item>
+        <item>Audio</item>
+    </string-array>
+
 </resources>

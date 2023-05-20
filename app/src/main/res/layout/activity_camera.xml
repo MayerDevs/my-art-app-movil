@@ -7,15 +7,31 @@
     tools:context=".CameraActivity">
 
 
-    <ImageView
-        android:id="@+id/iv_content"
-        android:layout_width="387dp"
-        android:layout_height="590dp"
+    <EditText
+        android:id="@+id/et_text"
+        android:layout_width="361dp"
+        android:layout_height="82dp"
+        android:background="@drawable/rounded_dark"
+        android:hint="Escribe ti descripción aquí"
+        android:inputType="text"
+        android:paddingLeft="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintVertical_bias="0.762"
+        android:lines="3"
+        android:maxLines="5"></EditText>
+
+    <ImageView
+        android:id="@+id/iv_content"
+        android:layout_width="361dp"
+        android:layout_height="414dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.214"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
@@ -42,4 +58,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.974" />
+
+    <Spinner
+        android:id="@+id/options_content"
+        android:layout_width="209dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="565dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.038" />
 </androidx.constraintlayout.widget.ConstraintLayout>
