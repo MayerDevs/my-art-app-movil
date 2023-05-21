@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
-import clases.Usuario
+import com.example.myart.clases.Usuario
 
 class RegisterNextActivity : AppCompatActivity() {
     lateinit var _cor_usu: EditText

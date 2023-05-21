@@ -46,11 +46,11 @@
         app:tint="#B3292929" />
 
     <Button
-        android:id="@+id/btn_iniciar_sesion7"
+        android:id="@+id/btn_chat"
         android:layout_width="147dp"
         android:layout_height="48dp"
         android:backgroundTint="#731E1E"
-        android:text="Perfil"
+        android:text="Chat"
         android:textColor="#FBFBFF"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -239,7 +239,7 @@
         android:layout_height="wrap_content"
         android:text="user1"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_iniciar_sesion7"
+        app:layout_constraintBottom_toTopOf="@+id/btn_chat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"

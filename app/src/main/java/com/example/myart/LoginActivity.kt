@@ -7,8 +7,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import clases.DbHelper
-import clases.Usuario
+import com.example.myart.clases.DbHelper
+import com.example.myart.clases.Usuario
 
 class LoginActivity : AppCompatActivity() {
 

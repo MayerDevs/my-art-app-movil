@@ -1,4 +1,4 @@
-package clases
+package com.example.myart.clases
 
 import android.content.ContentValues
 import android.content.Context

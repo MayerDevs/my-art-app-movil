@@ -1,4 +1,4 @@
-package clases
+package com.example.myart.clases
 
 import android.content.Context
 import android.widget.Toast
