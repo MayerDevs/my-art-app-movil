@@ -36,10 +36,10 @@ class RegisterNextActivity : AppCompatActivity() {
         var cor_usuU = bl?.getString("cor_usuU")
         var eda_usuU = bl?.getString("eda_usuU")
         var con_usuU = bl?.getString("con_usuU")
-        if(cor_usuU!=null){
-            _cor_usu.setText(cor_usuU)
+        var log = bl?.getString("log")
+        if(eda_usuU!=null){
+            _cor_usu.setText(auth.currentUser!!.email)
             _eda_usu.setText(eda_usuU)
-            _con_usu.setText(con_usuU)
         }
 
         _con_usu_verified = findViewById(R.id.con_usu_verified)
@@ -57,51 +57,75 @@ class RegisterNextActivity : AppCompatActivity() {
             if (cor_usu.isEmpty() || eda_usu.isEmpty() || con_usu.isEmpty() || con_usu.isEmpty() || policy_privacy.isSelected) {
                 Toast.makeText(this, "Pleace, fill all details.", Toast.LENGTH_SHORT).show()
             } else {
-                auth.createUserWithEmailAndPassword(cor_usu,con_usu)
-                    .addOnSuccessListener {
-                        var profile=UserProfileChangeRequest.Builder()
-                            .setDisplayName(nom_usu).build()
-
-                        it.user!!.updateProfile(profile)
-                            .addOnSuccessListener {
-                                finish()
-                                val user=auth.currentUser
-                                val uid=user!!.uid
-                                val map = hashMapOf(
-                                    "nom_usu" to nom_usu,
-                                    "ape_usu" to ape_usu,
-                                    "tip_usu" to tip_usu,
-                                    "cel_usu" to cel_usu,
-                                    "eda_usu" to eda_usu
-
-                                )
-                                val db= Firebase.firestore
-
-                                db.collection("Usuarios").document(uid).set(map)
-                                    .addOnSuccessListener {
-                                        Toast.makeText(this, "User register", Toast.LENGTH_SHORT).show()
-
-                                    }
-                                    .addOnFailureListener{
-                                        Toast.makeText(this, "Something wrong", Toast.LENGTH_SHORT).show()
-
-                                    }
+                if (eda_usu!=null){
+                    val uid=auth.currentUser!!.uid
+                    val db= Firebase.firestore
+                    db.collection("Usuarios").document(uid).update("nom_usu",nom_usu
+                    )
+                    db.collection("Usuarios").document(uid).update("ape_usu",ape_usu
+                    )
+                    db.collection("Usuarios").document(uid).update("tip_usu",tip_usu
+                    )
+                    db.collection("Usuarios").document(uid).update("cel_usu",cel_usu
+                    )
+                    db.collection("Usuarios").document(uid).update("eda_usu",eda_usu
+                    )
+                    Toast.makeText(this, "Updated succesfully", Toast.LENGTH_SHORT).show()
+                    val i = Intent(this, ProfileActivity::class.java)
+                    startActivity(i)
 
 
-                            }
-                            .addOnFailureListener{
-                                Toast.makeText(this, "User or password wrong", Toast.LENGTH_SHORT).show()
+                }else{
+                    auth.createUserWithEmailAndPassword(cor_usu,con_usu)
+                        .addOnSuccessListener {
+                            var profile=UserProfileChangeRequest.Builder()
+                                .setDisplayName(nom_usu).build()
 
-                            }
+                            it.user!!.updateProfile(profile)
+                                .addOnSuccessListener {
+                                    finish()
+                                    val user=auth.currentUser
+                                    val uid=user!!.uid
+                                    val map = hashMapOf(
+                                        "nom_usu" to nom_usu,
+                                        "ape_usu" to ape_usu,
+                                        "tip_usu" to tip_usu,
+                                        "cel_usu" to cel_usu,
+                                        "eda_usu" to eda_usu
 
-                    }
-                    .addOnFailureListener{
-                        Toast.makeText(this, "User or password wrong", Toast.LENGTH_SHORT).show()
-                    }
+                                    )
+                                    val db= Firebase.firestore
 
-              //  Toast.makeText(this, "Register succesfully.", Toast.LENGTH_SHORT).show()
-               val i = Intent(this, MainActivity::class.java)
-                startActivity(i)
+                                    db.collection("Usuarios").document(uid).set(map)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(this, "User register", Toast.LENGTH_SHORT).show()
+
+                                        }
+                                        .addOnFailureListener{
+                                            Toast.makeText(this, "Something wrong", Toast.LENGTH_SHORT).show()
+
+                                        }
+
+
+                                }
+                                .addOnFailureListener{
+                                    Toast.makeText(this, "Something wrong", Toast.LENGTH_SHORT).show()
+
+                                }
+
+                        }
+                        .addOnFailureListener{
+                            Toast.makeText(this, "User or password wrong", Toast.LENGTH_SHORT).show()
+                        }
+
+                    //  Toast.makeText(this, "Register succesfully.", Toast.LENGTH_SHORT).show()
+                    val i = Intent(this, MainActivity::class.java)
+                    startActivity(i)
+
+
+                }
+
+
             }
         }
     }

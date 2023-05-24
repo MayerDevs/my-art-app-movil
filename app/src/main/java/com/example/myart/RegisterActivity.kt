@@ -7,6 +7,9 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -17,6 +20,7 @@ class RegisterActivity : AppCompatActivity() {
     lateinit var btnlogin: Button
     lateinit var tvlogin: TextView
     lateinit var btn_next_register: Button
+    private val auth= FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -30,23 +34,28 @@ class RegisterActivity : AppCompatActivity() {
         btn_next_register = findViewById(R.id.btn_next)
         val i = Intent(this@RegisterActivity, RegisterNextActivity::class.java)
         val bl = getIntent().getExtras();
-        var nom_usuU = bl?.getString("nom_usu")
-        var ape_usuU = bl?.getString("ape_usu")
-        var tip_usuU = bl?.getString("tip_usu")
-        var cel_usuU = bl?.getString("cel_usu")
-        var cor_usuU = bl?.getString("cor_usu")
-        var eda_usuU = bl?.getString("eda_usu")
-        var con_usuU = bl?.getString("tip_usu")
-        var Update = bl?.getBoolean("Update")
-        if(nom_usuU!=null){
-            _nom_usu.setText(nom_usuU)
-            _ape_usu.setText(ape_usuU)
-            _tel_usu.setText(cel_usuU.toString())
-            _tip_usu.setText(tip_usuU)
-            i.putExtra("cor_usuU",cor_usuU)
-            i.putExtra("eda_usuU",eda_usuU)
-            i.putExtra("con_usuU",con_usuU)
-            i.putExtra("update",Update)
+        var log = bl?.getBoolean("log")
+        if(log!=null){
+            val currentuser=auth.currentUser
+            val uid=currentuser!!.uid
+            val db= Firebase.firestore
+            db.collection("Usuarios").document(uid).get().addOnSuccessListener {documento->
+                if(documento.exists()){
+                    val nom_usu=documento.data?.get("nom_usu").toString()
+                    val ape_usu=documento.data?.get("ape_usu").toString()
+                    val tel_usu=documento.data?.get("cel_usu").toString()
+                    val tip_usu=documento.data?.get("tip_usu").toString()
+                    val eda_usu=documento.data?.get("eda_usu").toString()
+                    _nom_usu.setText(nom_usu)
+                    _ape_usu.setText(ape_usu)
+                    _tel_usu.setText(tel_usu)
+                    _tip_usu.setText(tip_usu)
+                    i.putExtra("eda_usuU",eda_usu)
+                    i.putExtra("log",log)
+
+
+                }
+            }
         }
 
         btn_next_register.setOnClickListener{

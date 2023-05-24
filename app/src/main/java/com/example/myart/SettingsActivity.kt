@@ -55,41 +55,9 @@ class SettingsActivity : AppCompatActivity() {
             Toast.makeText(this, "policy and privacy.", Toast.LENGTH_SHORT).show()
         }
         update.setOnClickListener{
-            val db: SQLiteDatabase =DbHelper.readableDatabase
-            val cursor=db.rawQuery("SELECT * FROM Usuarios",null)
-           // Toast.makeText(this, "Start session", Toast.LENGTH_SHORT).show()
-            if(cursor.moveToFirst()){
-                var cor_usu=cursor.getString(1)
-                var URL="http://192.168.80.18/MyArt/Usuario.php?cor_usu=$cor_usu&consulta=consult"
-                val jsonRequest= JsonObjectRequest(
-                    Request.Method.GET,URL,null,
-                    { response ->
-                        val i = Intent(this, RegisterActivity::class.java)
-                        i.putExtra("nom_usu",response.getString("nom_usu"))
-                        i.putExtra("ape_usu",response.getString("ape_usu"))
-                        i.putExtra("cor_usu",response.getString("cor_usu"))
-                        i.putExtra("tip_usu",response.getString("tip_usu"))
-                        i.putExtra("cel_usu",response.getString("cel_usu"))
-                        i.putExtra("eda_usu",response.getString("eda_usu"))
-                        i.putExtra("con_usu",response.getString("con_usu"))
-                        i.putExtra("Update",true)
-                        Toast.makeText(this,response.getString("cel_usu") , Toast.LENGTH_SHORT).show()
-                        startActivity(i)
-
-                    },
-                    {
-                        Toast.makeText(this, "Something went wrong with the consult.", Toast.LENGTH_SHORT).show()
-
-                    })
-                val requestQueue = Volley.newRequestQueue(this)
-                requestQueue.add(jsonRequest)
-
-            }
-            else{
-                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
-            }
-            //   var user= Usuario("","","", cor_usu,"",0,"",this,"consult","")
-
+            val i = Intent(this, RegisterActivity::class.java)
+            i.putExtra("log",true)
+            startActivity(i)
         }
 
         delete.setOnClickListener{
