@@ -46,11 +46,11 @@
         app:tint="#B3292929" />
 
     <Button
-        android:id="@+id/btn_iniciar_sesion7"
+        android:id="@+id/btn_chat"
         android:layout_width="147dp"
         android:layout_height="48dp"
         android:backgroundTint="#731E1E"
-        android:text="Perfil"
+        android:text="Chat"
         android:textColor="#FBFBFF"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,6 +59,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2"
         app:layout_constraintVertical_bias="0.153" />
+
+    <Button
+        android:id="@+id/btn_chats"
+        android:layout_width="147dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#731E1E"
+        android:text="Chats"
+        android:textColor="#FBFBFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.825"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="0.01" />
+    <Button
+        android:id="@+id/btn_seguir"
+        android:layout_width="147dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#731E1E"
+        android:text="Seguir"
+        android:textColor="#FBFBFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.825"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="0.230" />
 
     <ImageView
         android:id="@+id/id_music2"
@@ -220,12 +249,12 @@
         app:srcCompat="@drawable/camera" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txt_usu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="user1"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_iniciar_sesion7"
+        app:layout_constraintBottom_toTopOf="@+id/btn_chat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"

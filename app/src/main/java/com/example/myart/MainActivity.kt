@@ -4,8 +4,17 @@ import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
+import com.example.myart.clases.DbHelper
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import com.example.myart.clases.Usuario
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var music: ImageView
     lateinit var user: ImageView
     lateinit var upload_resource: ImageView
+    private val auth= FirebaseAuth.getInstance()
 
     /* VARIABLES BLOQUEADAS PORQUE SE ENCUENTRAN EN EL CARD_VIDEO
 
@@ -26,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var search: ImageView
     var log=false
-    var DbHelper=DbHelper(this)
+    var DbHelper= DbHelper(this)
     //lateinit var comment_resource: ImageView
     //lateinit var name_user_resource: ImageView
 
@@ -63,10 +73,8 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "music.", Toast.LENGTH_SHORT).show()
         }
         user.setOnClickListener{
-            val db:SQLiteDatabase=DbHelper.readableDatabase
-            val cursor=db.rawQuery("SELECT * FROM Usuarios",null)
-            if(cursor.moveToFirst()){
-                Toast.makeText(this, "Start session", Toast.LENGTH_SHORT).show()
+
+            if(auth.currentUser!=null){
                 val i = Intent(this, ProfileActivity::class.java)
                 startActivity(i)
             }
