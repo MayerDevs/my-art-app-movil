@@ -1,6 +1,7 @@
 package com.example.myart
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
@@ -18,6 +19,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat.startActivityForResult
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
@@ -45,6 +48,7 @@ class CameraActivity : AppCompatActivity() {
         val btnCamera = findViewById<ImageView>(R.id.btn_camera)
         val btnUpload = findViewById<Button>(R.id.btn_upload)
         con_con = findViewById(R.id.iv_content)
+        txt_con = findViewById(R.id.et_text)
 
         btnCamera.setOnClickListener {
             Toast.makeText(this, "Camera open", Toast.LENGTH_LONG).show()
@@ -59,7 +63,7 @@ class CameraActivity : AppCompatActivity() {
         val uploadButton = findViewById<Button>(R.id.btn_upload)
         uploadButton.setOnClickListener {
             val drawable = imageView.drawable
-            val bitmap = (drawable asBitmapDrawable).bitmap
+            val bitmap = (drawable as BitmapDrawable).bitmap
             uploadImage(bitmap)
         }
     }
@@ -77,12 +81,45 @@ class CameraActivity : AppCompatActivity() {
         val imageRef = storageRef.child("images/${System.currentTimeMillis()}.jpg")
         val uploadTask = imageRef.putBytes(data)
 
-        uploadTask.addOnSuccessListener {
+        uploadTask.addOnSuccessListener { taskSnapshot ->
             // La imagen se ha cargado exitosamente
-            // Puedes obtener la URL de descarga de la imagen subida usando: it.metadata?.reference?.downloadUrl
+            val imageRef = taskSnapshot.metadata?.reference
+            imageRef?.downloadUrl?.addOnSuccessListener { downloadUri ->
+                // URL de descarga de la imagen
+                val imageUrl = downloadUri.toString()
+
+                // Guardar la URL en Firebase Firestore
+                saveImageUrlToFirestore(imageUrl)
+            }
         }.addOnFailureListener {
+            // Error al subir la imagen
             Toast.makeText(this, "Error al subir la imagen", Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun saveImageUrlToFirestore(imageUrl: String) {
+        val firestore = FirebaseFirestore.getInstance()
+
+        // Aquí debes reemplazar "coleccion" con el nombre de tu colección en Firestore
+        val documentRef = firestore.collection("Contenido").document()
+
+        val data = hashMapOf(
+            "ide_con" to documentRef.id, // Utiliza el ID del documento como el valor de ide_con
+            "ide_usu" to 1, // Valor predeterminado de ide_usu
+            "tip_con" to "musica", // Valor predeterminado de tip_con
+            "txt_con" to txt_con.text.toString(), // Obtiene el texto de la descripción desde el EditText
+            "con_con" to imageUrl // URL de descarga de la imagen
+        )
+
+        documentRef.set(data, SetOptions.merge())
+            .addOnSuccessListener {
+                // Los datos se han guardado exitosamente en Firestore
+            }
+            .addOnFailureListener { e ->
+                // Error al guardar los datos en Firestore
+                Toast.makeText(this, "Error al guardar los datos en Firestore", Toast.LENGTH_LONG).show()
+                Log.e(TAG, "Error al guardar los datos en Firestore", e)
+            }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
