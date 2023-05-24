@@ -13,17 +13,14 @@ class DbHelper(context: Context) : SQLiteOpenHelper(context, "MyArt", null, 1) {
     override fun onCreate(db: SQLiteDatabase?) {
         val Usuarios: String =
             "CREATE TABLE Usuarios(cor_usu VARCHAR(50),con_usu VARCHAR(50))"
-        val Comentarios: String =
-            "CREATE TABLE Comentarios(ide_com INT  PRIMARY KEY,con_com VARCHAR(500),ide_con INT)"
-        val Likes: String =
-            "CREATE TABLE Likes(ide_lik INT PRIMARY KEY,ide_con INT)"
         val Mensajes: String =
-            "CREATE TABLE Mensajes(ide_men INT PRIMARY KEY,men_con VARCHAR(500),ide_usu INT,ide_rec INT)"
+            "CREATE TABLE Mensajes(men_con VARCHAR(500),ide_usu INT,ide_rec INT)"
+        val Contacts: String =
+            "CREATE TABLE Contacts(nom_con VARCHAR(50),cor_con varchar(50))"
 
         db!!.execSQL(Usuarios)
-        db!!.execSQL(Comentarios)
-        db!!.execSQL(Likes)
         db!!.execSQL(Mensajes)
+        db!!.execSQL(Contacts)
 
     }
 
