@@ -34,14 +34,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Correo electrónico" />
-        <TextView
-            android:id="@+id/tv_date"
-            android:textAlignment="textEnd"
-            android:textSize="10dp"
-            android:textColor="@color/teal_700"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fecha de contacto" />
     </LinearLayout>
 
 </LinearLayout>

@@ -4,12 +4,17 @@ import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.myart.clases.DbHelper
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.myart.clases.Usuario
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var music: ImageView
     lateinit var user: ImageView
     lateinit var upload_resource: ImageView
+    private val auth= FirebaseAuth.getInstance()
 
     /* VARIABLES BLOQUEADAS PORQUE SE ENCUENTRAN EN EL CARD_VIDEO
 
@@ -67,29 +73,10 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "music.", Toast.LENGTH_SHORT).show()
         }
         user.setOnClickListener{
-            val db:SQLiteDatabase=DbHelper.readableDatabase
-            val cursor=db.rawQuery("SELECT * FROM Usuarios",null)
-            if(cursor.moveToFirst()){
-                Toast.makeText(this, "Start session", Toast.LENGTH_SHORT).show()
-                var cor_usu=cursor.getString(1)
-             //   var user= Usuario("","","", cor_usu,"",0,"",this,"consult","")
-                var URL="http://192.168.80.18/MyArt/Usuario.php?cor_usu=$cor_usu&consulta=consult"
-               var nom_usu=""
-                val jsonRequest= JsonObjectRequest(
-                    Request.Method.GET,URL,null,
-                    { response ->
-                    nom_usu=response.getString("nom_usu")
-                        val i = Intent(this, ProfileActivity::class.java)
-                        i.putExtra("nom_usu",nom_usu)
-                        startActivity(i)
 
-                },
-                    {
-                    Toast.makeText(this, "Something went wrong with the consult.", Toast.LENGTH_SHORT).show()
-
-                })
-                val requestQueue = Volley.newRequestQueue(this)
-                requestQueue.add(jsonRequest)
+            if(auth.currentUser!=null){
+                val i = Intent(this, ProfileActivity::class.java)
+                startActivity(i)
             }
             else{
                 Toast.makeText(this, "user.", Toast.LENGTH_SHORT).show()

@@ -25,22 +25,5 @@
         android:layout_height="match_parent"
         android:layout_marginTop="70dp" />
 
-    <!--
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/ly_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="80dp"
-            android:paddingBottom="80dp"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-    </ScrollView>
-    -->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

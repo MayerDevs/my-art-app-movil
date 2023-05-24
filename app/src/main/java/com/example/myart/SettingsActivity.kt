@@ -11,6 +11,7 @@ import com.example.myart.clases.DbHelper
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.firebase.auth.FirebaseAuth
 
 class SettingsActivity : AppCompatActivity() {
     lateinit var previous: ImageView
@@ -21,6 +22,7 @@ class SettingsActivity : AppCompatActivity() {
     lateinit var delete: Button
     lateinit var update: Button
     var DbHelper= DbHelper(this)
+    private val auth= FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,18 +44,11 @@ class SettingsActivity : AppCompatActivity() {
             Toast.makeText(this, "notification.", Toast.LENGTH_SHORT).show()
         }
         close.setOnClickListener{
-            var DbHelper: DbHelper
-            DbHelper= DbHelper(this)
-            var del=DbHelper.delete(1)
-            if(del>0){
-                Toast.makeText(this, "Close session succesfully", Toast.LENGTH_SHORT).show()
-                val i = Intent(this, MainActivity::class.java)
-                startActivity(i)
+            auth.signOut()
+            Toast.makeText(this, "Close session succesfully.", Toast.LENGTH_SHORT).show()
+            val i = Intent(this, MainActivity::class.java)
+            startActivity(i)
 
-            }
-            else{
-                Toast.makeText(this, "Something wrong", Toast.LENGTH_SHORT).show()
-            }
 
         }
         policy_privacy.setOnClickListener{

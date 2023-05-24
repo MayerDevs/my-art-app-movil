@@ -59,6 +59,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2"
         app:layout_constraintVertical_bias="0.153" />
+
+    <Button
+        android:id="@+id/btn_chats"
+        android:layout_width="147dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#731E1E"
+        android:text="Chats"
+        android:textColor="#FBFBFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.825"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="0.01" />
     <Button
         android:id="@+id/btn_seguir"
         android:layout_width="147dp"

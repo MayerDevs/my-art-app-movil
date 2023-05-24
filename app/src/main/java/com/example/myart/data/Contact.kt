@@ -1,7 +1,7 @@
 package com.example.myart.data
 
 data class Contact(
-    var name: String,
-    var email: String,
-    var date: String
+    var ide_usu: Int,
+    var nom_usu: String,
+    var cor_usu: String
 )

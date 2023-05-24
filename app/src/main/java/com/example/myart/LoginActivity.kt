@@ -9,6 +9,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.myart.clases.DbHelper
 import com.example.myart.clases.Usuario
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
 
@@ -17,6 +20,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var cor_usu: EditText
     lateinit var con_usu: EditText
     lateinit var DbHelper: DbHelper
+    private val auth= FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,17 +39,19 @@ class LoginActivity : AppCompatActivity() {
             if (cor_usu.isEmpty() || con_usu.isEmpty()){
                 Toast.makeText(this@LoginActivity, "Pleace, fill all details.", Toast.LENGTH_SHORT).show()
             }else{
-               // Toast.makeText(this@LoginActivity, "Login succesfully.", Toast.LENGTH_SHORT).show()
-                val bl = getIntent().getExtras();
-                var log = bl?.getBoolean("log")
-                val user= Usuario("","","",cor_usu,"",0,con_usu,this,"login","")
-                if(log!=null){
-                    user.log=log
-                }
-                //Toast.makeText(this@LoginActivity, ""+log, Toast.LENGTH_SHORT).show()
-                user.Login("http://192.168.80.18/MyArt/Usuario.php?cor_usu=$cor_usu&con_usu=$con_usu&consulta=login")
-                val i = Intent(this, MainActivity::class.java)
-                startActivity(i)
+                auth.signInWithEmailAndPassword(cor_usu,con_usu)
+                    .addOnSuccessListener {
+                        var DbHelper: DbHelper
+                        DbHelper= DbHelper(this)
+                        DbHelper.add(cor_usu,con_usu)
+                        val i = Intent(this, MainActivity::class.java)
+                        startActivity(i)
+                    }
+                    .addOnFailureListener{
+                        Toast.makeText(this, "User or password wrong", Toast.LENGTH_SHORT).show()
+
+
+                    }
 
             }
 
