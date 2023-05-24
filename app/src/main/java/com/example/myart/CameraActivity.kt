@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat.startActivityForResult
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import java.io.ByteArrayOutputStream
 import java.io.IOException
 
 class CameraActivity : AppCompatActivity() {
@@ -44,6 +46,11 @@ class CameraActivity : AppCompatActivity() {
         val btnUpload = findViewById<Button>(R.id.btn_upload)
         con_con = findViewById(R.id.iv_content)
 
+        btnCamera.setOnClickListener {
+            Toast.makeText(this, "Camera open", Toast.LENGTH_LONG).show()
+            startForResultRight.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
+        }
+
         val selectButton = findViewById<ImageView>(R.id.btn_gallery)
         selectButton.setOnClickListener {
             openImagePicker()
@@ -51,7 +58,9 @@ class CameraActivity : AppCompatActivity() {
 
         val uploadButton = findViewById<Button>(R.id.btn_upload)
         uploadButton.setOnClickListener {
-            uploadImage()
+            val drawable = imageView.drawable
+            val bitmap = (drawable asBitmapDrawable).bitmap
+            uploadImage(bitmap)
         }
     }
 
@@ -60,9 +69,13 @@ class CameraActivity : AppCompatActivity() {
         startActivityForResult(intent, PICK_IMAGE_REQUEST)
     }
 
-    private fun uploadImage() {
-        val imageRef = storageRef.child("images/${selectedImageUri.lastPathSegment}")
-        val uploadTask = imageRef.putFile(selectedImageUri)
+    private fun uploadImage(imageBitmap: Bitmap) {
+        val baos = ByteArrayOutputStream()
+        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+
+        val imageRef = storageRef.child("images/${System.currentTimeMillis()}.jpg")
+        val uploadTask = imageRef.putBytes(data)
 
         uploadTask.addOnSuccessListener {
             // La imagen se ha cargado exitosamente
@@ -90,6 +103,16 @@ class CameraActivity : AppCompatActivity() {
         }
 
         imageView.setImageBitmap(bitmap)
+    }
+
+    private val startForResultRight = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val intent = result.data
+            val imageBitmap = intent?.extras?.get("data") as Bitmap
+            imageView.setImageBitmap(imageBitmap)
+
+            uploadImage(imageBitmap) // Subir la imagen a Firebase Storage
+        }
     }
 }
 
