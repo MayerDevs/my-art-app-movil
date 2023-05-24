@@ -7,11 +7,15 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myart.clases.DbHelper
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.myart.clases.Usuario
+import com.example.myart.clases.adapters.ContentAdapter
+import com.example.myart.data.Content
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -50,6 +54,20 @@ class MainActivity : AppCompatActivity() {
         music = findViewById(R.id.iv_music)
         user = findViewById(R.id.iv_user)
         upload_resource = findViewById(R.id.iv_upload_resource)
+
+        val contenidoList = intent.getSerializableExtra("contenidoList") as? ArrayList<Content>
+        if (contenidoList != null) {
+            val recyclerView: RecyclerView = findViewById(R.id.rv_content_container)
+            val layoutManager = LinearLayoutManager(this)
+            recyclerView.layoutManager = layoutManager
+
+            val adapter = ContentAdapter(contenidoList)
+            recyclerView.adapter = adapter
+        } else {
+            Toast.makeText(this, "error.", Toast.LENGTH_SHORT).show()
+            // Tratar el caso de lista nula
+            // Por ejemplo, mostrar un mensaje de error o realizar alguna otra acción
+        }
 
         /* VARIABLES BLOQUEADAS PORQUE SE ENCUENTRAN EN EL CARD_VIDEO
 

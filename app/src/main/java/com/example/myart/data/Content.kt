@@ -1,4 +1,4 @@
-package com.example.myart.clases
+package com.example.myart.data
 
 data class Content(
     val ide_con: Int,

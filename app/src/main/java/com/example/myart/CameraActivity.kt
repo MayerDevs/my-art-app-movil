@@ -15,17 +15,14 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat.startActivityForResult
-import com.example.myart.clases.Content
+import com.example.myart.data.Content
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
-import java.io.IOException
 
 class CameraActivity : AppCompatActivity() {
 
@@ -53,11 +50,15 @@ class CameraActivity : AppCompatActivity() {
         con_con = findViewById(R.id.iv_content)
         txt_con = findViewById(R.id.et_text)
 
-        //array_content =
+
 
         btnCamera.setOnClickListener {
             Toast.makeText(this, "Camera open", Toast.LENGTH_LONG).show()
             startForResultRight.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
+
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("contenidoList", ArrayList(contenidoList)) // Envía el array como un ArrayList
+            startActivity(intent)
         }
 
         val selectButton = findViewById<ImageView>(R.id.btn_gallery)
@@ -66,10 +67,13 @@ class CameraActivity : AppCompatActivity() {
         }
 
         val uploadButton = findViewById<Button>(R.id.btn_upload)
+
         uploadButton.setOnClickListener {
             val drawable = imageView.drawable
             val bitmap = (drawable as BitmapDrawable).bitmap
             uploadImage(bitmap)
+
+
         }
     }
 
@@ -106,7 +110,7 @@ class CameraActivity : AppCompatActivity() {
             Log.d(TAG, "Contenido agregado: $contenido")
 
             saveImageUrlToFirestore(downloadUrl.toString())
-            
+
         }.addOnFailureListener { exception ->
             Toast.makeText(this, "Error al subir la imagen", Toast.LENGTH_LONG).show()
             Log.e(TAG, "Error al subir la imagen", exception)
