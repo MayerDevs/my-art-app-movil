@@ -19,6 +19,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat.startActivityForResult
+import com.example.myart.clases.Content
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
@@ -38,6 +39,8 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var imageView: ImageView
     private val storage = Firebase.storage
     private val storageRef = storage.reference
+    val contenidoList = mutableListOf<Content>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +52,8 @@ class CameraActivity : AppCompatActivity() {
         val btnUpload = findViewById<Button>(R.id.btn_upload)
         con_con = findViewById(R.id.iv_content)
         txt_con = findViewById(R.id.et_text)
+
+        //array_content =
 
         btnCamera.setOnClickListener {
             Toast.makeText(this, "Camera open", Toast.LENGTH_LONG).show()
@@ -82,19 +87,31 @@ class CameraActivity : AppCompatActivity() {
         val uploadTask = imageRef.putBytes(data)
 
         uploadTask.addOnSuccessListener { taskSnapshot ->
-            // La imagen se ha cargado exitosamente
-            val imageRef = taskSnapshot.metadata?.reference
-            imageRef?.downloadUrl?.addOnSuccessListener { downloadUri ->
-                // URL de descarga de la imagen
-                val imageUrl = downloadUri.toString()
+            // Obtén la URL de descarga de la imagen subida
+            val downloadUrl = taskSnapshot.metadata?.reference?.downloadUrl
 
-                // Guardar la URL en Firebase Firestore
-                saveImageUrlToFirestore(imageUrl)
-            }
-        }.addOnFailureListener {
-            // Error al subir la imagen
+            // Crea un objeto Contenido con los datos
+            val contenido = Content(
+                ide_con = 0, // Asigna el valor correcto para ide_con (autoincremental)
+                ide_usu = 1, // Asigna el valor correcto para ide_usu (por defecto 1)
+                tip_con = "musica", // Asigna el valor correcto para tip_con (por defecto "musica")
+                txt_con = txt_con.text.toString(),
+                con_con = downloadUrl.toString()
+            )
+
+            // Agrega el objeto Contenido al array
+            contenidoList.add(contenido)
+
+            // Imprime los datos del contenido agregado
+            Log.d(TAG, "Contenido agregado: $contenido")
+
+            saveImageUrlToFirestore(downloadUrl.toString())
+            
+        }.addOnFailureListener { exception ->
             Toast.makeText(this, "Error al subir la imagen", Toast.LENGTH_LONG).show()
+            Log.e(TAG, "Error al subir la imagen", exception)
         }
+
     }
 
     private fun saveImageUrlToFirestore(imageUrl: String) {
