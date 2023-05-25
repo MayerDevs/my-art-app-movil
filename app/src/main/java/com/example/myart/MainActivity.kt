@@ -11,13 +11,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myart.clases.DbHelper
-<<<<<<< HEAD
-=======
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
-import com.example.myart.clases.Usuario
->>>>>>> a0ae4ebc75bc2510b2994c245b7368a1973aa2e3
+
 import com.example.myart.clases.adapters.ContentAdapter
 import com.example.myart.data.Content
 import com.google.firebase.auth.FirebaseAuth
@@ -51,34 +45,6 @@ class MainActivity : AppCompatActivity() {
         image = findViewById(R.id.iv_image)
         music = findViewById(R.id.iv_music)
         user = findViewById(R.id.iv_user)
-<<<<<<< HEAD
-        upload_resource = findViewById(R.id.iv_camera)
-=======
-        upload_resource = findViewById(R.id.iv_upload_resource)
-
-        val contenidoList = intent.getSerializableExtra("contenidoList") as? ArrayList<Content>
-        if (contenidoList != null) {
-            val recyclerView: RecyclerView = findViewById(R.id.rv_content_container)
-            val layoutManager = LinearLayoutManager(this)
-            recyclerView.layoutManager = layoutManager
-
-            val adapter = ContentAdapter(contenidoList)
-            recyclerView.adapter = adapter
-        } else {
-            Toast.makeText(this, "error.", Toast.LENGTH_SHORT).show()
-            // Tratar el caso de lista nula
-            // Por ejemplo, mostrar un mensaje de error o realizar alguna otra acción
-        }
-
-        /* VARIABLES BLOQUEADAS PORQUE SE ENCUENTRAN EN EL CARD_VIDEO
-
-        image_user_resource = findViewById(R.id.iv_user_resource)
-        like = findViewById(R.id.iv_like)
-        comment = findViewById(R.id.iv_comment)
-        share = findViewById(R.id.iv_share)
-        */
-
->>>>>>> a0ae4ebc75bc2510b2994c245b7368a1973aa2e3
         search = findViewById(R.id.iv_search)
 
 
