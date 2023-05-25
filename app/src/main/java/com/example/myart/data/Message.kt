@@ -1,9 +1,8 @@
 package com.example.myart.data
 
-import android.content.Context
-
 data class Message(
-    var ide_usu: Int,
+    var ide_usu: String,
     var ide_rec: String,
-    var men_con: String
+    var men_con: String,
+    var dat_men: com.google.firebase.Timestamp?
 )

@@ -14,16 +14,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/tv_contacto"
-            android:textStyle="bold"
-            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre del contacto" />
+            android:text="Nombre del contacto"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <TextView
-            android:id="@+id/tv_mensaje"
-            android:textColor="@color/white"
+            android:id="@+id/men_con"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="" />

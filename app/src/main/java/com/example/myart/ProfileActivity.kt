@@ -19,6 +19,7 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var chat: Button
     lateinit var chats: Button
     private val auth= FirebaseAuth.getInstance()
+    lateinit var dataList2: ArrayList<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -28,6 +29,7 @@ class ProfileActivity : AppCompatActivity() {
         user = findViewById(R.id.txt_usu)
         chat = findViewById(R.id.btn_chat)
         chats = findViewById(R.id.btn_chats)
+        dataList2 = ArrayList()
         val bl = getIntent().getExtras();
 
         val currentuser=auth.currentUser
@@ -57,9 +59,18 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(i)
         }
         chats.setOnClickListener{
-            Toast.makeText(this, "Chat", Toast.LENGTH_SHORT).show()
-            val i = Intent(this, Chatsactivity::class.java)
-            startActivity(i)
+            val db= Firebase.firestore
+            //  Toast.makeText(this, ""+uid, Toast.LENGTH_SHORT).show()
+            db.collection("Mensajes").whereEqualTo("ide_rec",uid).get().addOnSuccessListener { documents ->
+                for(documento in documents) {
+                    var uid=documento["ide_usu"]
+                    dataList2.add(uid.toString())
+                }
+                val i = Intent(this, Chatsactivity::class.java)
+                i.putExtra("uids",dataList2)
+                startActivity(i)
+            }
+            //Toast.makeText(this, "Chat", Toast.LENGTH_SHORT).show()
         }
 
     }

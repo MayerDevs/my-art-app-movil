@@ -8,10 +8,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.example.myart.clases.DbHelper
-import com.example.myart.clases.Usuario
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 

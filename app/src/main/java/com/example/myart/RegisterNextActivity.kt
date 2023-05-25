@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
-import com.example.myart.clases.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.ktx.firestore
@@ -57,7 +56,7 @@ class RegisterNextActivity : AppCompatActivity() {
             if (cor_usu.isEmpty() || eda_usu.isEmpty() || con_usu.isEmpty() || con_usu.isEmpty() || policy_privacy.isSelected) {
                 Toast.makeText(this, "Pleace, fill all details.", Toast.LENGTH_SHORT).show()
             } else {
-                if (eda_usu!=null){
+                if (eda_usuU!=null){
                     val uid=auth.currentUser!!.uid
                     val db= Firebase.firestore
                     db.collection("Usuarios").document(uid).update("nom_usu",nom_usu
