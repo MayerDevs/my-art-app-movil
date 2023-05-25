@@ -23,9 +23,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var music: ImageView
     lateinit var user: ImageView
     lateinit var upload_resource: ImageView
-    private val auth= FirebaseAuth.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
     lateinit var search: ImageView
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var contentAdapter: ContentAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,35 +43,45 @@ class MainActivity : AppCompatActivity() {
         upload_resource = findViewById(R.id.iv_upload_resource)
         search = findViewById(R.id.iv_search)
 
-        val recyclerView: RecyclerView = findViewById(R.id.rv_content_container)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        val firestore = FirebaseFirestore.getInstance()
-        val collectionRef = firestore.collection("Content")
 
-        // Realiza la consulta para obtener los datos
-        collectionRef.get()
-            .addOnSuccessListener { querySnapshot ->
-                val contents = mutableListOf<Content>()
 
-                // Itera sobre los documentos obtenidos en la consulta
-                for (document in querySnapshot) {
-                    // Obtén los valores de los campos del documento
-                    val URL_image = document.getString("con_con").toString()
-                    // ... obtén otros campos según tus necesidades
-                    Log.e("mens", "route ${URL_image}")
+        val db = FirebaseFirestore.getInstance()
 
-                    // Crea una instancia de la clase Content con los valores obtenidos
-                    val content = Content(URL_image)
-                    contents.add(content)
+        // Realizar la consulta
+        db.collection("Contenido")
+            .get()
+            .addOnSuccessListener { documents ->
+                // El método onSuccess se ejecuta cuando la consulta es exitosa
+                // Aquí puedes obtener los documentos y extraer las imágenes
+
+                // Crear una lista para almacenar las imágenes
+                val imageList = mutableListOf<String>()
+
+                // Iterar sobre los documentos
+                for (document in documents) {
+                    // Obtener el campo "con_con" de cada documento
+                    val imageUrl = document.getString("con_con")
+
+                    // Agregar la URL de la imagen a la lista
+                    imageUrl?.let {
+                        (imageList as MutableList<String>).add(it)
+                    }
                 }
-                Log.e("mens", "Se hizo la busqueda")
-                // Crea el adaptador con la lista de contenidos obtenidos
-                val adapter = ContentAdapter(this, contents)
-                recyclerView.adapter = adapter
+                contentAdapter = ContentAdapter(this, imageList)
+                recyclerView.adapter = contentAdapter
             }
             .addOnFailureListener { exception ->
-                Log.e("mens", "Error al obtener los datos: $exception")
+                // El método onFailure se ejecuta si ocurre algún error durante la consulta
+                // Aquí puedes manejar el error de acuerdo a tus necesidades
             }
+
+        recyclerView = findViewById(R.id.rv_content_container)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // Obtén la lista de imágenes (imageList) de tu consulta a Firebase
+        // Asumiendo que tienes la lista de imágenes disponible
+
+
 
 
         home.setOnClickListener{
