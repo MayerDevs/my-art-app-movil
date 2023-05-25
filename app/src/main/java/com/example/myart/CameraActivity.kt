@@ -15,16 +15,14 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat.startActivityForResult
+import com.example.myart.data.Content
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
-import java.io.IOException
 
 class CameraActivity : AppCompatActivity() {
 
@@ -38,17 +36,19 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var imageView: ImageView
     private val storage = Firebase.storage
     private val storageRef = storage.reference
+    val contenidoList = mutableListOf<Content>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
 
         imageView = findViewById(R.id.iv_content)
-        val btnGallery = findViewById<ImageView>(R.id.btn_gallery)
         val btnCamera = findViewById<ImageView>(R.id.btn_camera)
-        val btnUpload = findViewById<Button>(R.id.btn_upload)
         con_con = findViewById(R.id.iv_content)
         txt_con = findViewById(R.id.et_text)
+
+
 
         btnCamera.setOnClickListener {
             Toast.makeText(this, "Camera open", Toast.LENGTH_LONG).show()
@@ -61,6 +61,7 @@ class CameraActivity : AppCompatActivity() {
         }
 
         val uploadButton = findViewById<Button>(R.id.btn_upload)
+
         uploadButton.setOnClickListener {
             val drawable = imageView.drawable
             val bitmap = (drawable as BitmapDrawable).bitmap
@@ -95,6 +96,7 @@ class CameraActivity : AppCompatActivity() {
             // Error al subir la imagen
             Toast.makeText(this, "Error al subir la imagen", Toast.LENGTH_LONG).show()
         }
+
     }
 
     private fun saveImageUrlToFirestore(imageUrl: String) {
