@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var user: ImageView
     lateinit var upload_resource: ImageView
     private val auth = FirebaseAuth.getInstance()
-    lateinit var camera: ImageView
 
     lateinit var search: ImageView
 
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         image = findViewById(R.id.iv_image)
         music = findViewById(R.id.iv_music)
         user = findViewById(R.id.iv_user)
-        camera = findViewById(R.id.iv_camera)
+        upload_resource = findViewById(R.id.iv_camera)
         search = findViewById(R.id.iv_search)
 
 
@@ -142,7 +141,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        camera.setOnClickListener{
+        upload_resource.setOnClickListener{
             Toast.makeText(this, "camera.", Toast.LENGTH_SHORT).show()
             val i = Intent(this, CameraActivity::class.java)
             startActivity(i)
