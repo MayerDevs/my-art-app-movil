@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         music = findViewById(R.id.iv_music)
         user = findViewById(R.id.iv_user)
         search = findViewById(R.id.iv_search)
-
+        upload_resource = findViewById(R.id.iv_camera)
 
 
         val db = FirebaseFirestore.getInstance()

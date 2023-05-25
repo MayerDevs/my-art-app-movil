@@ -66,6 +66,11 @@ class CameraActivity : AppCompatActivity() {
             val drawable = imageView.drawable
             val bitmap = (drawable as BitmapDrawable).bitmap
             uploadImage(bitmap)
+
+
+            Log.e("error", "No se pudo cambiar de activity")
+            val i = Intent(this, CameraActivity::class.java)
+            startActivity(i)
         }
     }
 
