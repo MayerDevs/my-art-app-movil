@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myart.adapters.MessageAdapter
+import com.example.myart.clases.adapters.MessageAdapter
 import com.example.myart.data.Message
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.Timestamp
