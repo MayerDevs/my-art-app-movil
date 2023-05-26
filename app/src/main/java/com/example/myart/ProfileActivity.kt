@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -34,30 +35,32 @@ class ProfileActivity : AppCompatActivity() {
         chats = findViewById(R.id.btn_chats)
         gallery = findViewById(R.id.iv_gallery_image)
 
+
         dataList2 = ArrayList()
         val bl = getIntent().getExtras();
 
-        val currentuser=auth.currentUser
-        val uid=currentuser!!.uid
+        val currentuser = auth.currentUser
+        val uid = currentuser!!.uid
         val db= Firebase.firestore
         db.collection("Usuarios").document(uid).get().addOnSuccessListener {documento->
             if(documento.exists()){
                 val nom_usu=documento.data?.get("nom_usu").toString()
                 user.setText(nom_usu)
-
             }
         }
 
-
-        val imageUriString = intent.getStringExtra("imageUri")
-        if (imageUriString != null) {
-            val imageUri = Uri.parse(imageUriString)
+        db.collection("Usuarios").document(uid).get().addOnSuccessListener {documento->
+            val con_con = documento.data?.get("con_con")
+            Log.e("usuario", "el codigo del usuario es ${uid} y la imagen es ${con_con}")
             val image = findViewById<ImageView>(R.id.iv_image_profile)
-            image.setImageURI(imageUri)
+            Glide.with(this)
+                .load(con_con)
+                .into(image)
         }
 
         home.setOnClickListener{
-            Toast.makeText(this, "home.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "home.", Toast.LENGTH_SHORT).show()
+
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)
         }

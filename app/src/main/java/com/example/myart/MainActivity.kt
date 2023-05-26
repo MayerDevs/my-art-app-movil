@@ -38,9 +38,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         home = findViewById(R.id.iv_home)
-        video = findViewById(R.id.iv_video)
-        image = findViewById(R.id.iv_image)
-        music = findViewById(R.id.iv_music)
         user = findViewById(R.id.iv_user)
         search = findViewById(R.id.iv_search)
         rv = findViewById(R.id.rv_content_container)
@@ -63,15 +60,6 @@ class MainActivity : AppCompatActivity() {
 
         home.setOnClickListener{
             Toast.makeText(this, "Home.", Toast.LENGTH_SHORT).show()
-        }
-        video.setOnClickListener{
-            Toast.makeText(this, "video.", Toast.LENGTH_SHORT).show()
-        }
-        image.setOnClickListener{
-            Toast.makeText(this, "image.", Toast.LENGTH_SHORT).show()
-        }
-        music.setOnClickListener{
-            Toast.makeText(this, "music.", Toast.LENGTH_SHORT).show()
         }
         user.setOnClickListener{
             if(auth.currentUser!=null){
