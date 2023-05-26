@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             val posts = value!!.toObjects(Content::class.java)
 
             posts.forEachIndexed { index, post ->
-                post.uid = value.documents[index].id
+              //  post.uid = value.documents[index].id
 
 
                 rv.apply {
