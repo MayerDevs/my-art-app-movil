@@ -18,6 +18,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.myart.data.Content
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
@@ -30,6 +31,7 @@ class CameraActivity : AppCompatActivity() {
     lateinit var con_con: ImageView
     lateinit var _tip_con: Button
     lateinit var txt_con: EditText
+    private val auth= FirebaseAuth.getInstance()
 
     private val PICK_IMAGE_REQUEST = 1
     private lateinit var selectedImageUri: Uri
@@ -108,7 +110,8 @@ class CameraActivity : AppCompatActivity() {
         // Aquí debes reemplazar "coleccion" con el nombre de tu colección en Firestore
         val documentRef = firestore.collection("Contenido").document()
 
-        val post = Content(imageUrl, txt_con.text.toString())
+        var post = Content(imageUrl, txt_con.text.toString())
+        post.uid=auth.currentUser!!.uid
 
         firestore.collection("Contenido").add(post)
             .addOnSuccessListener {
@@ -120,6 +123,7 @@ class CameraActivity : AppCompatActivity() {
                 Log.e(TAG, "Error al guardar los datos en Firestore", e)
             }
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

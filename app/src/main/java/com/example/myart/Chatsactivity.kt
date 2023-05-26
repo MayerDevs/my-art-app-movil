@@ -1,8 +1,10 @@
 package com.example.myart
 
+import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,7 +27,7 @@ import org.json.JSONObject
 class Chatsactivity : AppCompatActivity() {
     var DbHelper= DbHelper(this)
     lateinit var rv: RecyclerView
-    lateinit var txt: TextView
+    lateinit var btn_back: ImageButton
     lateinit var ContactAdapter: ContactAdapter
     lateinit var dataList: ArrayList<Contact>
     lateinit var dataList2: ArrayList<String>
@@ -36,7 +38,8 @@ class Chatsactivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         rv = findViewById(R.id.rv)
-        txt = findViewById(R.id.txt_prueba)
+        btn_back = findViewById(R.id.btn_back)
+
         dataList = ArrayList()
         dataList2 = ArrayList()
         DbHelper.addC("","","")
@@ -79,6 +82,13 @@ class Chatsactivity : AppCompatActivity() {
                 }
 
             }
+
+        btn_back.setOnClickListener{
+            val i = Intent(this, ProfileActivity::class.java)
+            startActivity(i)
+        }
+
+
 
         }
 

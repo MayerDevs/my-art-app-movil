@@ -30,7 +30,7 @@
             android:text="Nombre del contacto" />
         <TextView
             android:id="@+id/tv_email"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Correo electrónico" />
