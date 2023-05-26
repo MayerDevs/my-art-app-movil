@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myart.R
 import com.bumptech.glide.Glide
+import com.example.myart.CommentActivity
 import com.example.myart.data.Content
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,6 +30,7 @@ class ContentAdapter(private val context: Context, private val dataset: List<Con
         val description: TextView = itemView.findViewById(R.id.tv_comment)
         val user_image: ImageView = itemView.findViewById(R.id.iv_user_image)
         val count_likes: TextView = itemView.findViewById(R.id.tv_count_likes)
+        val comment: ImageView = itemView.findViewById(R.id.iv_comment)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -84,6 +86,12 @@ class ContentAdapter(private val context: Context, private val dataset: List<Con
             }
             val shareIntent = Intent.createChooser(sendIntent, null)
             context.startActivity(shareIntent)
+        }
+
+        holder.comment.setOnClickListener{
+            val context = holder.itemView.context
+            val intent = Intent(context, CommentActivity::class.java)
+            context.startActivity(intent)
         }
 
     }
