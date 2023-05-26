@@ -69,7 +69,7 @@ class CameraActivity : AppCompatActivity() {
 
 
             Log.e("error", "No se pudo cambiar de activity")
-            val i = Intent(this, CameraActivity::class.java)
+            val i = Intent(this, MainActivity::class.java)
             startActivity(i)
         }
     }
