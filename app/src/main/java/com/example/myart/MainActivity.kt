@@ -1,12 +1,19 @@
 package com.example.myart
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myart.clases.DbHelper
+import com.example.myart.clases.adapters.ContentAdapter
+import com.example.myart.data.Content
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,21 +23,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var music: ImageView
     lateinit var user: ImageView
     lateinit var upload_resource: ImageView
-    private val auth= FirebaseAuth.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
-    /* VARIABLES BLOQUEADAS PORQUE SE ENCUENTRAN EN EL CARD_VIDEO
-
-    lateinit var image_user_resource: ImageView
-    lateinit var like: ImageView
-    lateinit var comment: ImageView
-    lateinit var share: ImageView
-     */
+    private  val db = FirebaseFirestore.getInstance()
 
     lateinit var search: ImageView
-    var log=false
-    var DbHelper= DbHelper(this)
-    //lateinit var comment_resource: ImageView
-    //lateinit var name_user_resource: ImageView
+
+    private lateinit var rv: RecyclerView
+    private lateinit var contentAdapter: ContentAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,17 +42,25 @@ class MainActivity : AppCompatActivity() {
         image = findViewById(R.id.iv_image)
         music = findViewById(R.id.iv_music)
         user = findViewById(R.id.iv_user)
-        upload_resource = findViewById(R.id.iv_upload_resource)
-
-        /* VARIABLES BLOQUEADAS PORQUE SE ENCUENTRAN EN EL CARD_VIDEO
-
-        image_user_resource = findViewById(R.id.iv_user_resource)
-        like = findViewById(R.id.iv_like)
-        comment = findViewById(R.id.iv_comment)
-        share = findViewById(R.id.iv_share)
-        */
-
         search = findViewById(R.id.iv_search)
+        rv = findViewById(R.id.rv_content_container)
+
+        // Realizar la consulta
+        db.collection("Contenido").addSnapshotListener{value, error ->
+            val posts = value!!.toObjects(Content::class.java)
+
+            posts.forEachIndexed { index, post ->
+                post.uid = value.documents[index].id
+
+
+                rv.apply {
+                    setHasFixedSize(true)
+                    layoutManager = LinearLayoutManager(this@MainActivity)
+                    adapter = ContentAdapter(this@MainActivity, posts)
+                }
+            }
+        }
+
         home.setOnClickListener{
             Toast.makeText(this, "Home.", Toast.LENGTH_SHORT).show()
         }
@@ -65,7 +74,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "music.", Toast.LENGTH_SHORT).show()
         }
         user.setOnClickListener{
-
             if(auth.currentUser!=null){
                 val i = Intent(this, ProfileActivity::class.java)
                 startActivity(i)
@@ -75,41 +83,15 @@ class MainActivity : AppCompatActivity() {
                 val i = Intent(this, LoginActivity::class.java)
                 startActivity(i)
             }
-
         }
 
-        upload_resource.setOnClickListener{
-            Toast.makeText(this, "camera.", Toast.LENGTH_SHORT).show()
+
+
+        search.setOnClickListener{
+            Toast.makeText(this, "open camera.", Toast.LENGTH_SHORT).show()
             val i = Intent(this, CameraActivity::class.java)
             startActivity(i)
         }
-
-        /* VARIABLES BLOQUEADAS PORQUE SE ENCUENTRAN EN EL CARD_VIDEO
-
-        image_user_resource.setOnClickListener{
-            Toast.makeText(this, "profile user resource.", Toast.LENGTH_SHORT).show()
-            val i = Intent(this, ProfileActivity::class.java)
-            startActivity(i)
-        }
-        like.setOnClickListener{
-            Toast.makeText(this, "like like.", Toast.LENGTH_SHORT).show()
-            val i = Intent(this, LoginActivity::class.java)
-            startActivity(i)
-        }
-        comment.setOnClickListener{
-            Toast.makeText(this, "comment comment.", Toast.LENGTH_SHORT).show()
-            val i = Intent(this, LoginActivity::class.java)
-            startActivity(i)
-        }
-        share.setOnClickListener{
-            Toast.makeText(this, "share share.", Toast.LENGTH_SHORT).show()
-            val i = Intent(this, LoginActivity::class.java)
-            startActivity(i)
-        }*/
-        search.setOnClickListener{
-            Toast.makeText(this, "search.", Toast.LENGTH_SHORT).show()
-            val i = Intent(this, SearchActivity::class.java)
-            startActivity(i)
-        }
     }
+
 }

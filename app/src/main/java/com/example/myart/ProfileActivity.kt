@@ -3,6 +3,7 @@ package com.example.myart
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,6 +19,7 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var user: TextView
     lateinit var chat: Button
     lateinit var chats: Button
+    lateinit var gallery: ImageView
     private val auth= FirebaseAuth.getInstance()
     lateinit var dataList2: ArrayList<String>
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +31,8 @@ class ProfileActivity : AppCompatActivity() {
         user = findViewById(R.id.txt_usu)
         chat = findViewById(R.id.btn_chat)
         chats = findViewById(R.id.btn_chats)
+        gallery = findViewById(R.id.iv_gallery_image)
+
         dataList2 = ArrayList()
         val bl = getIntent().getExtras();
 
@@ -72,6 +76,11 @@ class ProfileActivity : AppCompatActivity() {
             }
             //Toast.makeText(this, "Chat", Toast.LENGTH_SHORT).show()
         }
+        gallery.setOnClickListener{
+            Log.d("gallery", "GALLERY OPEN")
 
+            val i = Intent(this, GalleryProfileActivity::class.java)
+            startActivity(i)
+        }
     }
 }

@@ -14,8 +14,7 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.myart.adapters.ContactAdapter
-import com.example.myart.adapters.MessageAdapter
+import com.example.myart.clases.adapters.ContactAdapter
 import com.example.myart.clases.DbHelper
 import com.example.myart.data.Contact
 import com.example.myart.data.Message

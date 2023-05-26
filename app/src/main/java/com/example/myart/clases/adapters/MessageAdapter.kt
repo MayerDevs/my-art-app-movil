@@ -1,4 +1,4 @@
-package com.example.myart.adapters
+package com.example.myart.clases.adapters
 
 import android.view.LayoutInflater
 import android.view.View
