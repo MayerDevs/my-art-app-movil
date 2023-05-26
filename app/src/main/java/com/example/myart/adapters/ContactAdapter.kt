@@ -37,7 +37,7 @@ public class ContactAdapter(private var itemList: List<Contact>) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var item = itemList[position]
         holder.tvName.text = item.nom_usu
-        holder.tvEmail.text = item.ide_usu
+        holder.tvEmail.text = item.tip_usu
         this.uid=item.ide_usu
         Log.d("uid",this.uid)
         holder.tvName.setOnClickListener{

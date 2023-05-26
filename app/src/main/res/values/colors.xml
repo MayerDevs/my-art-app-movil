@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="card_bg">#DAEFF8</color>
     <color name="card_border">#93ACA8</color>
+    <color name="card_bg_whatsapp">#FFFFFF</color>
+    <color name="card_border_whatsapp">#EAEAEA</color>
 </resources>

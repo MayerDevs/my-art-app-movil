@@ -1,6 +1,7 @@
 
 package com.example.myart
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
@@ -15,10 +16,12 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
+
 class MyChatActivity : AppCompatActivity() {
 
     lateinit var men_con: EditText
     lateinit var Send: ImageView
+    lateinit var btn_back:ImageButton
     var ide_usu: String = ""
     lateinit var rv: RecyclerView
     lateinit var dataList: ArrayList<Message>
@@ -33,6 +36,7 @@ class MyChatActivity : AppCompatActivity() {
         val bl = intent.extras
         val uid = bl?.getString("uid").toString()
         Send = findViewById(R.id.send)
+        btn_back =findViewById(R.id.btn_back)
         men_con = findViewById(R.id.men_con)
         ide_usu = uid
         dataList = ArrayList()
@@ -60,6 +64,23 @@ class MyChatActivity : AppCompatActivity() {
                     }
             }
         }
+        btn_back.setOnClickListener {
+            lateinit var dataList2: ArrayList<String>
+            dataList2 = ArrayList()
+            val db= Firebase.firestore
+            //  Toast.makeText(this, ""+uid, Toast.LENGTH_SHORT).show()
+            db.collection("Mensajes").whereEqualTo("ide_rec",uid).get().addOnSuccessListener { documents ->
+                for(documento in documents) {
+                    var uid=documento["ide_usu"]
+                    dataList2.add(uid.toString())
+                }
+                val i = Intent(this, Chatsactivity::class.java)
+                i.putExtra("uids",dataList2)
+                startActivity(i)
+            }
+
+        }
+
     }
 
     private fun initViews(uid: String) {
