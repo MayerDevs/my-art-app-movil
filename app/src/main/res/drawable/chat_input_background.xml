@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FFFFFF" /> <!-- Color de fondo del chat -->
+    <corners android:radius="24dp" /> <!-- Radio de los bordes del chat -->
+    <gradient
+        android:angle="270"
+        android:startColor="#F2F2F2"
+    android:endColor="#EDEDED"
+    android:type="linear" />
+</shape>

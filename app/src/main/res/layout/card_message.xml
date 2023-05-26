@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_margin="20dp"
+    android:layout_margin="8dp"
     android:layout_height="wrap_content"
     android:background="@drawable/card_message_bg"
     android:gravity="center"
-    android:weightSum="100"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="8dp">
 
     <LinearLayout
-        android:padding="0dp"
-        android:layout_weight="80"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_weight="80"
+        android:gravity="start|center_vertical"
+        android:orientation="vertical"
+        android:paddingEnd="8dp"
+        android:paddingStart="16dp">
 
         <TextView
             android:id="@+id/tv_contacto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nombre del contacto"
-            android:textSize="20sp"
+            android:textColor="#000000"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/men_con"
-            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="" />
+            android:text=""
+            android:textColor="#000000" />
 
     </LinearLayout>
 

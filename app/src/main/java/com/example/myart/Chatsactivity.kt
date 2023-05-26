@@ -70,25 +70,15 @@ class Chatsactivity : AppCompatActivity() {
                 var nom_usu=documento.data?.get("nom_usu").toString()
                 var tip_usu=documento.data?.get("tip_usu").toString()
                 var obj=Contact(dataList2[i],nom_usu,tip_usu)
-                var consulta:SQLiteDatabase=DbHelper.readableDatabase
-                val cursor=consulta.rawQuery("SELECT * FROM Contacts",null)
-                if(cursor.moveToFirst()){
-                    while (cursor.moveToNext()){
-                        var obj2=Contact(cursor.getString(0),cursor.getString(1),cursor.getString(2))
-                        dataList.add(obj2)
-                        if(cursor.getString(0)!=obj.ide_usu){
-                            DbHelper.addC(obj.ide_usu,obj.nom_usu,obj.tip_usu)
-                        }
-
-
-                    }
-                }
+                dataList.add(obj)
                 //Toast.makeText(this, ""+nom_usu, Toast.LENGTH_SHORT).show()
                 ContactAdapter=ContactAdapter(dataList)
                 var layoutManager= LinearLayoutManager(applicationContext)
                 rv.layoutManager=layoutManager
                 rv.adapter=ContactAdapter
                 ContactAdapter.notifyDataSetChanged()
+                }
+
             }
 
         }
@@ -100,6 +90,5 @@ class Chatsactivity : AppCompatActivity() {
 
 
 
-    }
 
 
