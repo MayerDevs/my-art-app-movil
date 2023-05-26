@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import com.example.myart.clases.Usuario
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class RegisterNextActivity : AppCompatActivity() {
     lateinit var _cor_usu: EditText
@@ -17,7 +19,7 @@ class RegisterNextActivity : AppCompatActivity() {
     lateinit var _con_usu_verified: EditText
     lateinit var policy_privacy: CheckBox
     lateinit var btn_register: Button
-
+    private val auth= FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_next)
@@ -29,7 +31,16 @@ class RegisterNextActivity : AppCompatActivity() {
         var nom_usu = bl?.getString("nom_usu")
         var ape_usu = bl?.getString("ape_usu")
         var tip_usu = bl?.getString("tip_usu")
-        var cel_usu = bl?.getString("tel_usu").toString()
+        var cel_usu:Int = bl?.getInt("tel_usu")!!
+        var cor_usuU = bl?.getString("cor_usuU")
+        var eda_usuU = bl?.getString("eda_usuU")
+        var con_usuU = bl?.getString("con_usuU")
+        var log = bl?.getString("log")
+        if(eda_usuU!=null){
+            _cor_usu.setText(auth.currentUser!!.email)
+            _eda_usu.setText(eda_usuU)
+        }
+
         _con_usu_verified = findViewById(R.id.con_usu_verified)
         policy_privacy = findViewById(R.id.cb_politcy_privacy)
         btn_register = findViewById(R.id.btn_register)
@@ -40,16 +51,80 @@ class RegisterNextActivity : AppCompatActivity() {
             val eda_usu = _eda_usu.text.toString()
             val con_usu = _con_usu.text.toString()
 
-            //val con_usu_verified = _con_usu_verified.text.toString()
-            val user=Usuario(nom_usu.toString(),ape_usu.toString(),tip_usu.toString(),cor_usu,eda_usu,2,con_usu,this,"insert",nom_usu.toString())
+            //val con_usu_verified = _con_usu_verified.text.toString(
 
             if (cor_usu.isEmpty() || eda_usu.isEmpty() || con_usu.isEmpty() || con_usu.isEmpty() || policy_privacy.isSelected) {
                 Toast.makeText(this, "Pleace, fill all details.", Toast.LENGTH_SHORT).show()
             } else {
-                user.Register("http://192.168.80.18/MyArt/Usuario.php")
-              //  Toast.makeText(this, "Register succesfully.", Toast.LENGTH_SHORT).show()
-               // val i = Intent(this, MainActivity::class.java)
-                //startActivity(i)
+                if (eda_usuU!=null){
+                    val uid=auth.currentUser!!.uid
+                    val db= Firebase.firestore
+                    db.collection("Usuarios").document(uid).update("nom_usu",nom_usu
+                    )
+                    db.collection("Usuarios").document(uid).update("ape_usu",ape_usu
+                    )
+                    db.collection("Usuarios").document(uid).update("tip_usu",tip_usu
+                    )
+                    db.collection("Usuarios").document(uid).update("cel_usu",cel_usu
+                    )
+                    db.collection("Usuarios").document(uid).update("eda_usu",eda_usu
+                    )
+                    Toast.makeText(this, "Updated succesfully", Toast.LENGTH_SHORT).show()
+                    val i = Intent(this, ProfileActivity::class.java)
+                    startActivity(i)
+
+
+                }else{
+                    auth.createUserWithEmailAndPassword(cor_usu,con_usu)
+                        .addOnSuccessListener {
+                            var profile=UserProfileChangeRequest.Builder()
+                                .setDisplayName(nom_usu).build()
+
+                            it.user!!.updateProfile(profile)
+                                .addOnSuccessListener {
+                                    finish()
+                                    val user=auth.currentUser
+                                    val uid=user!!.uid
+                                    val map = hashMapOf(
+                                        "nom_usu" to nom_usu,
+                                        "ape_usu" to ape_usu,
+                                        "tip_usu" to tip_usu,
+                                        "cel_usu" to cel_usu,
+                                        "eda_usu" to eda_usu
+
+                                    )
+                                    val db= Firebase.firestore
+
+                                    db.collection("Usuarios").document(uid).set(map)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(this, "User register", Toast.LENGTH_SHORT).show()
+
+                                        }
+                                        .addOnFailureListener{
+                                            Toast.makeText(this, "Something wrong", Toast.LENGTH_SHORT).show()
+
+                                        }
+
+
+                                }
+                                .addOnFailureListener{
+                                    Toast.makeText(this, "Something wrong", Toast.LENGTH_SHORT).show()
+
+                                }
+
+                        }
+                        .addOnFailureListener{
+                            Toast.makeText(this, "User or password wrong", Toast.LENGTH_SHORT).show()
+                        }
+
+                    //  Toast.makeText(this, "Register succesfully.", Toast.LENGTH_SHORT).show()
+                    val i = Intent(this, MainActivity::class.java)
+                    startActivity(i)
+
+
+                }
+
+
             }
         }
     }

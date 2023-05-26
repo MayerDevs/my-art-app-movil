@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:width="8dp" /> <!-- Ancho de la barra de desplazamiento -->
+    <solid android:color="#D1D1D1" /> <!-- Color de la barra de desplazamiento -->
+    <corners android:radius="4dp" /> <!-- Radio de los bordes de la barra de desplazamiento -->
+</shape>
