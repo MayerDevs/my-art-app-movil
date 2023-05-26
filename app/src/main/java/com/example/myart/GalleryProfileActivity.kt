@@ -17,16 +17,28 @@ class GalleryProfileActivity : AppCompatActivity() {
 
     lateinit var btnGallery: Button
     lateinit var btnSend: Button
-
+    var selectedImageUri: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gallery_profile)
 
         btnGallery = findViewById(R.id.btn_gallery_profile)
         btnSend = findViewById(R.id.btn_send)
 
+
         btnSend.setOnClickListener{
             Log.e("del", "subir imagen")
+            if (selectedImageUri != null) {
+                val intent = Intent(this, ProfileActivity::class.java)
+                intent.putExtra("imageUri", selectedImageUri.toString())
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Seleccione una imagen primero", Toast.LENGTH_SHORT).show()
+                Log.e("profile", "Seleccione una imagen primero")
+            }
         }
 
         btnGallery.setOnClickListener {
@@ -39,9 +51,9 @@ class GalleryProfileActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            val imageUri: Uri? = data?.data
+            selectedImageUri  = data?.data
             val image = findViewById<ImageView>(R.id.iv_image_profile)
-            image.setImageURI(imageUri)
+            image.setImageURI(selectedImageUri)
         }
 
     }

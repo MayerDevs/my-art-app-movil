@@ -1,6 +1,7 @@
 package com.example.myart
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -45,6 +46,14 @@ class ProfileActivity : AppCompatActivity() {
                 user.setText(nom_usu)
 
             }
+        }
+
+
+        val imageUriString = intent.getStringExtra("imageUri")
+        if (imageUriString != null) {
+            val imageUri = Uri.parse(imageUriString)
+            val image = findViewById<ImageView>(R.id.iv_image_profile)
+            image.setImageURI(imageUri)
         }
 
         home.setOnClickListener{
