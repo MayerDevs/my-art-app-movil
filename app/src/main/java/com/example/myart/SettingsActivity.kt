@@ -15,9 +15,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 class SettingsActivity : AppCompatActivity() {
     lateinit var previous: ImageView
-    lateinit var notification: Button
-    lateinit var policy_privacy: Button
-    lateinit var follow: Button
     lateinit var close: Button
     lateinit var delete: Button
     lateinit var update: Button
@@ -29,9 +26,6 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
         delete = findViewById(R.id.btn_delete_account)
         previous = findViewById(R.id.iv_previous)
-        notification = findViewById(R.id.btn_notification)
-        policy_privacy = findViewById(R.id.btn_policy_privacy)
-        follow = findViewById(R.id.btn_follow)
         close = findViewById(R.id.btn_close_session)
         update = findViewById(R.id.btn_update)
 
@@ -40,9 +34,6 @@ class SettingsActivity : AppCompatActivity() {
             val i = Intent(this, ProfileActivity::class.java)
             startActivity(i)
         }
-        notification.setOnClickListener{
-            Toast.makeText(this, "notification.", Toast.LENGTH_SHORT).show()
-        }
         close.setOnClickListener{
             auth.signOut()
             Toast.makeText(this, "Close session succesfully.", Toast.LENGTH_SHORT).show()
@@ -50,9 +41,6 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(i)
 
 
-        }
-        policy_privacy.setOnClickListener{
-            Toast.makeText(this, "policy and privacy.", Toast.LENGTH_SHORT).show()
         }
         update.setOnClickListener{
             val i = Intent(this, RegisterActivity::class.java)
@@ -65,11 +53,6 @@ class SettingsActivity : AppCompatActivity() {
             i.putExtra("log",true)
             startActivity(i)
 
-        }
-        follow.setOnClickListener{
-            Toast.makeText(this, "follows.", Toast.LENGTH_SHORT).show()
-            val i = Intent(this, FollowActivity::class.java)
-            startActivity(i)
         }
     }
 }

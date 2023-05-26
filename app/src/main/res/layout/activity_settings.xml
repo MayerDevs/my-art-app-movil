@@ -33,44 +33,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.144" />
 
-    <Button
-        android:id="@+id/btn_notification"
-        android:layout_width="352dp"
-        android:layout_height="52dp"
-        android:backgroundTint="#80292929"
-        android:text="Notificaciones"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.22" />
 
-    <Button
-        android:id="@+id/btn_follow"
-        android:layout_width="352dp"
-        android:layout_height="52dp"
-        android:backgroundTint="#80292929"
-        android:text="Followers"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.405" />
-
-    <Button
-        android:id="@+id/btn_policy_privacy"
-        android:layout_width="352dp"
-        android:layout_height="52dp"
-        android:backgroundTint="#80292929"
-        android:text="Polític and privacy"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.505" />
     <Button
         android:id="@+id/btn_close_session"
         android:layout_width="352dp"
@@ -94,7 +57,7 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.60" />
+        app:layout_constraintVertical_bias="0.40" />
     <Button
         android:id="@+id/btn_update"
         android:layout_width="352dp"
@@ -106,5 +69,5 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.700" />
+        app:layout_constraintVertical_bias="0.50" />
 </androidx.constraintlayout.widget.ConstraintLayout>

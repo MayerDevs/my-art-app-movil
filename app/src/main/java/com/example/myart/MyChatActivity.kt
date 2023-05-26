@@ -97,11 +97,11 @@ class MyChatActivity : AppCompatActivity() {
                 val uniqueDataList = HashSet<Message>()
 
                 for (doc in value!!) {
-                    val ide_usu = doc.getString("ide_usu").toString()
-                    val ide_rec = doc.getString("ide_rec").toString()
-                    val men_con = doc.getString("men_con").toString()
-                    val dat_men: com.google.firebase.Timestamp? = doc.getTimestamp("dat_men")
-                    val message = Message(ide_usu, ide_rec, men_con, dat_men)
+                    var ide_usu = doc.getString("ide_usu").toString()
+                    var ide_rec = doc.getString("ide_rec").toString()
+                    var men_con = doc.getString("men_con").toString()
+                    var dat_men: com.google.firebase.Timestamp? = doc.getTimestamp("dat_men")
+                    var message = Message(ide_usu, ide_rec, men_con, dat_men)
 
                     uniqueDataList.add(message)
                 }

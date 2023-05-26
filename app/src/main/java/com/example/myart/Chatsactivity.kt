@@ -71,7 +71,8 @@ class Chatsactivity : AppCompatActivity() {
             db.collection("Usuarios").document(dataList2[i]).get().addOnSuccessListener {documento->
                 var nom_usu=documento.data?.get("nom_usu").toString()
                 var tip_usu=documento.data?.get("tip_usu").toString()
-                var obj=Contact(dataList2[i],nom_usu,tip_usu)
+                var con_con=documento.data?.get("con_con").toString()
+                var obj=Contact(dataList2[i],nom_usu,tip_usu,con_con)
                 dataList.add(obj)
                 //Toast.makeText(this, ""+nom_usu, Toast.LENGTH_SHORT).show()
                 ContactAdapter=ContactAdapter(dataList)

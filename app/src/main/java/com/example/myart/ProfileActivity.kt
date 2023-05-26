@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -19,9 +20,11 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var home: ImageView
     lateinit var settings: ImageView
     lateinit var user: TextView
+    lateinit var seguir: Button
     lateinit var chat: Button
     lateinit var chats: Button
     lateinit var gallery: ImageView
+    var uid=""
     private val auth= FirebaseAuth.getInstance()
     lateinit var dataList2: ArrayList<String>
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,15 +35,31 @@ class ProfileActivity : AppCompatActivity() {
         settings = findViewById(R.id.iv_settings)
         user = findViewById(R.id.txt_usu)
         chat = findViewById(R.id.btn_chat)
+        seguir = findViewById(R.id.btn_seguir)
         chats = findViewById(R.id.btn_chats)
         gallery = findViewById(R.id.iv_gallery_image)
 
 
         dataList2 = ArrayList()
-        val bl = getIntent().getExtras();
-
+        val bl = getIntent().getExtras()
+        var ide_usu= bl?.getString("ide_usu")
         val currentuser = auth.currentUser
-        val uid = currentuser!!.uid
+        if(ide_usu!=null){
+            uid=ide_usu
+            if (uid != currentuser?.uid) {
+                chats.visibility = View.GONE
+            }
+            else{
+                chat.visibility = View.GONE
+                seguir.visibility = View.GONE
+            }
+        }
+        else{
+            chat.visibility = View.GONE
+            seguir.visibility = View.GONE
+            uid = currentuser!!.uid
+
+        }
         val db= Firebase.firestore
         db.collection("Usuarios").document(uid).get().addOnSuccessListener {documento->
             if(documento.exists()){
@@ -72,6 +91,7 @@ class ProfileActivity : AppCompatActivity() {
         chat.setOnClickListener{
             Toast.makeText(this, "Chat", Toast.LENGTH_SHORT).show()
             val i = Intent(this, MyChatActivity::class.java)
+            i.putExtra("uid",uid)
             startActivity(i)
         }
         chats.setOnClickListener{

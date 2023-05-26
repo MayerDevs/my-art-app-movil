@@ -15,6 +15,7 @@ import com.example.myart.R
 import com.bumptech.glide.Glide
 import com.example.myart.Chatsactivity
 import com.example.myart.CommentActivity
+import com.example.myart.ProfileActivity
 import com.example.myart.data.Content
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -55,10 +56,6 @@ class ContentAdapter(private val context: Context, private val dataset: List<Con
             .load(post.con_con)
             .into(holder.image)
 
-        Glide.with(context)
-            .load(post.con_con)
-            .into(holder.user_image)
-
         holder.description.text = post.txt_con
 
        // holder.user.text=post.uid
@@ -69,6 +66,16 @@ class ContentAdapter(private val context: Context, private val dataset: List<Con
             val likes = post.lik_con!!.toMutableList()
             var liked = likes.contains(auth.uid)
             setColor(liked, holder.like)
+            Glide.with(context)
+                .load(documents.data?.get("con_con"))
+                .into(holder.user_image)
+
+            holder.user_image.setOnClickListener {
+                val context = holder.itemView.context
+                val intent = Intent(context, ProfileActivity::class.java)
+                intent.putExtra("ide_usu",post.uid)
+                context.startActivity(intent)
+            }
 
             holder.like.setOnClickListener {
                 liked = !liked

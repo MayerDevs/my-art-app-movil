@@ -5,10 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myart.MyChatActivity
 import com.example.myart.data.Contact
 import com.example.myart.R
@@ -21,6 +23,7 @@ public class ContactAdapter(private var itemList: List<Contact>) :
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var tvName: TextView = view.findViewById(R.id.tv_name)
         var tvEmail: TextView = view.findViewById(R.id.tv_email)
+        var image: ImageView = view.findViewById(R.id.img_usu)
     }
 
 
@@ -40,6 +43,9 @@ public class ContactAdapter(private var itemList: List<Contact>) :
         holder.tvEmail.text = item.tip_usu
         this.uid=item.ide_usu
         Log.d("uid",this.uid)
+        Glide.with(holder.tvEmail.context)
+            .load(item.fot_usu)
+        .into(holder.image)
         holder.tvName.setOnClickListener{
             val i = Intent(holder.tvName.context, MyChatActivity::class.java)
             i.putExtra("uid",item.ide_usu)
