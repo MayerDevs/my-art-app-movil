@@ -7,17 +7,7 @@
     android:background="#292929"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/iv_camera"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.955"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
-        app:srcCompat="@drawable/camera" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_content_container"
@@ -40,8 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.963"
-        app:srcCompat="@drawable/lupa"
-        app:tint="@color/white" />
+        app:srcCompat="@drawable/camera" />
 
     <ImageView
         android:id="@+id/iv_home"

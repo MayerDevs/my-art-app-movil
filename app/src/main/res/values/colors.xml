@@ -9,4 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="card_bg">#DAEFF8</color>
     <color name="card_border">#93ACA8</color>
+
+
+
+    <color name="like">#EF0E5A</color>
 </resources>

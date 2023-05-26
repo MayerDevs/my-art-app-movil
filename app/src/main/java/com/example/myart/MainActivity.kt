@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myart.clases.DbHelper
 
 import com.example.myart.clases.adapters.ContentAdapter
+import com.example.myart.clases.adapters.ContentAdapterImage
 import com.example.myart.data.Content
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,9 +31,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var upload_resource: ImageView
     private val auth = FirebaseAuth.getInstance()
 
+    private  val db = FirebaseFirestore.getInstance()
+
     lateinit var search: ImageView
 
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var rv: RecyclerView
     private lateinit var contentAdapter: ContentAdapter
 
 
@@ -46,76 +49,23 @@ class MainActivity : AppCompatActivity() {
         music = findViewById(R.id.iv_music)
         user = findViewById(R.id.iv_user)
         search = findViewById(R.id.iv_search)
-        upload_resource = findViewById(R.id.iv_camera)
-
-
-        val db = FirebaseFirestore.getInstance()
+        rv = findViewById(R.id.rv_content_container)
 
         // Realizar la consulta
-        db.collection("Contenido")
-            .get()
-            .addOnSuccessListener { documents ->
-                // El método onSuccess se ejecuta cuando la consulta es exitosa
-                // Aquí puedes obtener los documentos y extraer las imágenes
+        db.collection("Contenido").addSnapshotListener{value, error ->
+            val posts = value!!.toObjects(Content::class.java)
 
-                // Crear una lista para almacenar las imágenes
-                val imageList = mutableListOf<String>()
+            posts.forEachIndexed { index, post ->
+                post.uid = value.documents[index].id
 
-                // Iterar sobre los documentos
-                Thread {
-                    // Iterar sobre los documentos
-                    for (document in documents) {
-                        // Obtener el campo "con_con" de cada documento
-                        val imageUrl = document.getString("con_con")
 
-                        // Verificar si la imagen existe
-                        imageUrl?.let {
-                            try {
-                                val url = URL(it)
-                                val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
-                                connection.requestMethod = "HEAD"
-
-                                // Obtener el código de respuesta
-                                val responseCode = connection.responseCode
-
-                                if (responseCode == HttpURLConnection.HTTP_OK) {
-                                    // La imagen existe, agregar la URL a la lista
-                                    runOnUiThread {
-                                        imageList.add(it)
-                                    }
-                                } else {
-                                    // La imagen no existe, omitirla
-                                    Log.e(TAG, "La imagen no existe: $it")
-                                }
-
-                                connection.disconnect()
-                            } catch (e: IOException) {
-                                // Error al verificar la existencia de la imagen
-                                Log.e(TAG, "Error al verificar la existencia de la imagen: $it", e)
-                            }
-                        }
-                    }
-
-                    // Actualizar el RecyclerView en el hilo principal
-                    runOnUiThread {
-                        contentAdapter = ContentAdapter(this, imageList)
-                        recyclerView.adapter = contentAdapter
-                    }
-                }.start()
+                rv.apply {
+                    setHasFixedSize(true)
+                    layoutManager = LinearLayoutManager(this@MainActivity)
+                    adapter = ContentAdapter(this@MainActivity, posts)
+                }
             }
-            .addOnFailureListener { exception ->
-                // El método onFailure se ejecuta si ocurre algún error durante la consulta
-                // Aquí puedes manejar el error de acuerdo a tus necesidades
-            }
-
-        recyclerView = findViewById(R.id.rv_content_container)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        // Obtén la lista de imágenes (imageList) de tu consulta a Firebase
-        // Asumiendo que tienes la lista de imágenes disponible
-
-
-
+        }
 
         home.setOnClickListener{
             Toast.makeText(this, "Home.", Toast.LENGTH_SHORT).show()
@@ -141,14 +91,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        upload_resource.setOnClickListener{
-            Toast.makeText(this, "camera.", Toast.LENGTH_SHORT).show()
-            val i = Intent(this, CameraActivity::class.java)
-            startActivity(i)
-        }
+
 
         search.setOnClickListener{
-            Toast.makeText(this, "search.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "open camera.", Toast.LENGTH_SHORT).show()
             val i = Intent(this, CameraActivity::class.java)
             startActivity(i)
         }

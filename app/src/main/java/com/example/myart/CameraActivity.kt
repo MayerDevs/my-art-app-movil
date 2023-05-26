@@ -68,9 +68,7 @@ class CameraActivity : AppCompatActivity() {
             uploadImage(bitmap)
 
 
-            Log.e("error", "No se pudo cambiar de activity")
-            val i = Intent(this, MainActivity::class.java)
-            startActivity(i)
+            finish()
         }
     }
 
@@ -110,15 +108,9 @@ class CameraActivity : AppCompatActivity() {
         // Aquí debes reemplazar "coleccion" con el nombre de tu colección en Firestore
         val documentRef = firestore.collection("Contenido").document()
 
-        val data = hashMapOf(
-            "ide_con" to documentRef.id, // Utiliza el ID del documento como el valor de ide_con
-            "ide_usu" to 1, // Valor predeterminado de ide_usu
-            "tip_con" to "musica", // Valor predeterminado de tip_con
-            "txt_con" to txt_con.text.toString(), // Obtiene el texto de la descripción desde el EditText
-            "con_con" to imageUrl // URL de descarga de la imagen
-        )
+        val post = Content(imageUrl, txt_con.text.toString())
 
-        documentRef.set(data, SetOptions.merge())
+        firestore.collection("Contenido").add(post)
             .addOnSuccessListener {
                 // Los datos se han guardado exitosamente en Firestore
             }
